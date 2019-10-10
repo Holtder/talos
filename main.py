@@ -1,12 +1,4 @@
 import APIfunctions
-from flask import Flask
-
-app = Flask(__name__)
-
-@app.route('/')    
-def hello_world():
-        return 'Hello, World!'
-
 
 arg_searchterm = "chrome"
 arg_country = "gb" #us, gb, nl
