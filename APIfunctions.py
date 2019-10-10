@@ -40,8 +40,7 @@ class appresult:
         for c in illegal_price:
             self.fullprice = self.fullprice.replace(c, '')
         self.fullprice = self.fullprice.strip()
-        print(self.fullprice)
-
+        
         # Formatting the date of the most recent patch
         self.latest_patch = latest_patch
         if self.latest_patch != None:
@@ -56,7 +55,7 @@ class appresult:
             self.latest_patch = "1808-08-08"
 
 
-def android_search(searchquery, country_code='nl', language_code='nl', pagerange=13):
+def android_search(searchquery, country_code='nl', pagerange=13):
     # Android Search Query, using the play-scraper package
     results = []
     total = 0
@@ -64,7 +63,7 @@ def android_search(searchquery, country_code='nl', language_code='nl', pagerange
     # As the play-scraper search functions per page, iteration (with a max of 13) is required
     for i in range(0, pagerange):
         response = play_scraper.search(
-            searchquery, i, True, language_code, country_code)
+            searchquery, i, True, 'en', country_code)
 
         # If the size of the page is 0, ergo when it is empty, break off the loop
         if not len(response) == 0:
@@ -85,7 +84,7 @@ def android_search(searchquery, country_code='nl', language_code='nl', pagerange
     return results
 
 
-def apple_search(searchquery, country_code='nl', language_code='nl_nl'):
+def apple_search(searchquery, country_code='nl'):
     # Apple Search Query, using the official iTunes API
     results = []
     total = 0
@@ -93,7 +92,7 @@ def apple_search(searchquery, country_code='nl', language_code='nl_nl'):
 
     # Two variables nessecary in the construction of the final request-URL
     url_endpoint = 'http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch'
-    search_params = {'country': country_code,  'lang': language_code,
+    search_params = {'country': country_code,  'lang': 'en-US',
                      'media': 'software',  'limit': 200,  'offset': 0,  'term': searchquery}
 
     # The iTunes API functions with pages as well, the size of one 'page' is set using the limit
@@ -119,14 +118,12 @@ def apple_search(searchquery, country_code='nl', language_code='nl_nl'):
     return results
 
 
-def search_both_stores(arg_searchterm, arg_country, arg_language):
+def search_both_stores(arg_searchterm, arg_country):
     # Using consts may seem redundant, but this allows one output to be applied differently where necessary
     # This way there is room for the addition of other languages without adding too much work
 
-    results = android_search(arg_searchterm, arg_country,
-                             consts.android_language_codes[arg_language], 1)
-    results += apple_search(arg_searchterm, arg_country,
-                            consts.apple_language_codes[arg_language])
+    results = android_search(arg_searchterm, arg_country, 1)
+    results += apple_search(arg_searchterm, arg_country)
     return results
 
 

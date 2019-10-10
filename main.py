@@ -2,9 +2,8 @@ import APIfunctions
 
 arg_searchterm = "limbo"
 arg_country = "nl" #us, gb, nl
-arg_language = "nl" #en, nl
 app_results = APIfunctions.search_both_stores(
-    arg_searchterm, arg_country, arg_language)
+    arg_searchterm, arg_country)
 
 APIfunctions.export_csv(app_results, "output")
 
