@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+    {% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Submit your Query</legend>
+                <div class="form-group">
+                    {{ form.query.label(class="form-control-label") }}
+                    {% if form.query.errors %}
+                        {{ form.query(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.query.errors%}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.query(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.shop_country.label(class="form-control-label") }}
+                    {% if form.shop_country.errors %}
+                        {{ form.shop_country(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.shop_country.errors%}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.shop_country(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.job_name.label(class="form-control-label") }}
+                    {% if form.job_name.errors %}
+                        {{ form.job_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.job_name.errors%}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.job_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already submitted a job? <a class="ml-2" href="{{ url_for('jobs') }}">Go here</a>
+        </small>
+    </div>
+{% endblock content %}
