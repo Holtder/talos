@@ -8,41 +8,56 @@ import json
 import consts
 from datetime import datetime
 
-# Each instance of this object represents one result from the app-store queries
-# Both APIs return a range of data but the variables used here are the ones that are returned by both
+# Illegal symbols that might corrupt the CSV output file
+illegal_price = ['$', '€', ' ', '.', ',']
+illegal_desc = [('\r', ''), ('\n', ''), (';', ',')]
+
+
 class appresult:
+    # Each instance of this object represents one result from the app-store queries
+    # Both APIs return a range of data but the variables used here are the ones that are returned by both
     def __init__(self, app_title, store, bundleid, description, dev_name, dev_id, fullprice, versionnumber, osreq, latest_patch, content_rating):
         self.app_title = app_title
         self.store = store
         self.bundleid = bundleid
         self.dev_name = dev_name
         self.dev_id = dev_id
-        self.fullprice = fullprice
         self.versionnumber = versionnumber
         self.osreq = osreq
         self.content_rating = content_rating
 
-        # Description formatting        
+        # Description formatting
         self.description = description
         if self.description == None:
             self.description = ''
-        self.description = self.description.replace('\r', '')
-        self.description = self.description.replace('\n', '')
-        self.description = self.description.replace(';', ',')
+        for c, v in illegal_desc:
+            self.description = self.description.replace(c, v)
+
+        # Price formatting to cents
+        self.fullprice = str(fullprice)
+        if (self.fullprice == None) or (self.fullprice == "") or str(self.fullprice) == "0":
+            self.fullprice = "00"
+        for c in illegal_price:
+            self.fullprice = self.fullprice.replace(c, '')
+        self.fullprice = self.fullprice.strip()
+        print(self.fullprice)
 
         # Formatting the date of the most recent patch
         self.latest_patch = latest_patch
-        if self.store == "android":
-            # Example: June 3, 2019 to 2019-06-03
-            self.latest_patch = str(datetime.strptime(self.latest_patch, "%B %d, %Y"))[0:10]
-        elif self.store == "apple":
-            # Example: 2014-07-15T15:08:56Z to 2014-07-15
-            self.latest_patch = self.latest_patch[0:10]
+        if self.latest_patch != None:
+            if self.store == "android":
+                # Example: June 3, 2019 to 2019-06-03
+                self.latest_patch = str(datetime.strptime(
+                    self.latest_patch, "%B %d, %Y"))[0:10]
+            elif self.store == "apple":
+                # Example: 2014-07-15T15:08:56Z to 2014-07-15
+                self.latest_patch = self.latest_patch[0:10]
+        else:
+            self.latest_patch = "1808-08-08"
 
-        
 
-# Android Search Query, using the play-scraper package
 def android_search(searchquery, country_code='nl', language_code='nl', pagerange=13):
+    # Android Search Query, using the play-scraper package
     results = []
     total = 0
 
@@ -69,8 +84,9 @@ def android_search(searchquery, country_code='nl', language_code='nl', pagerange
     print('Android total: %s' % total)
     return results
 
-# Apple Search Query, using the official iTunes API
+
 def apple_search(searchquery, country_code='nl', language_code='nl_nl'):
+    # Apple Search Query, using the official iTunes API
     results = []
     total = 0
     i = 0
@@ -102,12 +118,15 @@ def apple_search(searchquery, country_code='nl', language_code='nl_nl'):
     print('Apple total:%s' % total)
     return results
 
+
 def search_both_stores(arg_searchterm, arg_country, arg_language):
     # Using consts may seem redundant, but this allows one output to be applied differently where necessary
     # This way there is room for the addition of other languages without adding too much work
 
-    results = android_search(arg_searchterm, arg_country, consts.android_language_codes[arg_language], 1)
-    results += apple_search(arg_searchterm, arg_country, consts.apple_language_codes[arg_language])
+    results = android_search(arg_searchterm, arg_country,
+                             consts.android_language_codes[arg_language], 1)
+    results += apple_search(arg_searchterm, arg_country,
+                            consts.apple_language_codes[arg_language])
     return results
 
 
