@@ -9,7 +9,7 @@ import consts
 from datetime import datetime
 
 # Illegal symbols that might corrupt the CSV output file
-illegal_price = ['$', '€', ' ', '.', ',']
+illegal_price = ['$', '£', '€', ' ', '.', ',']
 illegal_desc = [('\r', ''), ('\n', ''), (';', ',')]
 
 
@@ -20,12 +20,18 @@ class appresult:
         self.app_title = app_title
         self.store = store
         self.bundleid = bundleid
-        self.dev_name = dev_name
-        self.dev_id = dev_id
+        self.dev_id = str(dev_id)
         self.versionnumber = versionnumber
         self.osreq = osreq
         self.content_rating = content_rating
 
+        # Dev name formatting: in some languages there is no dev name, only an ID
+        # In that case, it gets defaulted to 'Google Commerce Ltd', which will be converted to n/a
+        # But only if the dev ID is not google's
+        self.dev_name = dev_name
+        if (self.dev_id != "5700313618786177705") and (self.dev_name == 'Google Commerce Ltd'):
+            self.dev_name = "N/A"
+            
         # Description formatting
         self.description = description
         if self.description == None:
