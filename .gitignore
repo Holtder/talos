@@ -121,3 +121,4 @@ dmypy.json
 output/*
 site.db
 .vscode/settings.json
+.env/

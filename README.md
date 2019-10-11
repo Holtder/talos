@@ -1,3 +1,11 @@
+# Note to self, when developing on new device:
+`$ pip3 install virtualenv`
+`$ virtualenv --no-site-packages --distribute .env && source .env/bin/activate && pip install -r requirements.txt`
+
+Next time:
+
+`& source .env/bin/activate`
+
 # AppStoreScraper
 ## Requirements
 Make sure you have Python (3.6.8) and pip3 installed. There are many tutorials online that do a far better job on how to accomplish this than I ever could. Once you get that done, install the following python packages:
