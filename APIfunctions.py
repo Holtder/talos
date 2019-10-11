@@ -31,25 +31,25 @@ class appresult:
         self.dev_name = dev_name
         if (self.dev_id != "5700313618786177705") and (self.dev_name == 'Google Commerce Ltd'):
             self.dev_name = "N/A"
-            
+
         # Description formatting
         self.description = description
-        if self.description == None:
+        if self.description is None:
             self.description = ''
         for c, v in illegal_desc:
             self.description = self.description.replace(c, v)
 
         # Price formatting to cents
         self.fullprice = str(fullprice)
-        if (self.fullprice == None) or (self.fullprice == "") or str(self.fullprice) == "0":
+        if (self.fullprice is None) or (self.fullprice == "") or str(self.fullprice) == "0":
             self.fullprice = "00"
         for c in illegal_price:
             self.fullprice = self.fullprice.replace(c, '')
         self.fullprice = self.fullprice.strip()
-        
+
         # Formatting the date of the most recent patch
         self.latest_patch = latest_patch
-        if self.latest_patch != None:
+        if self.latest_patch is not None:
             if self.store == "android":
                 # Example: June 3, 2019 to 2019-06-03
                 self.latest_patch = str(datetime.strptime(
@@ -98,8 +98,8 @@ def apple_search(searchquery, country_code='nl'):
 
     # Two variables nessecary in the construction of the final request-URL
     url_endpoint = 'http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch'
-    search_params = {'country': country_code,  'lang': 'en-US',
-                     'media': 'software',  'limit': 200,  'offset': 0,  'term': searchquery}
+    search_params = {'country': country_code, 'lang': 'en-US',
+                     'media': 'software', 'limit': 200, 'offset': 0, 'term': searchquery}
 
     # The iTunes API functions with pages as well, the size of one 'page' is set using the limit
     # paramater in search_params. The offset is to set the starting position of the query
@@ -140,9 +140,9 @@ def export_csv(app_list, filename="output"):
     # Create target directory if doesn't exist yet
     if not os.path.exists(dirName):
         os.mkdir(dirName)
-        print("Directory ", dirName,  " Created ")
+        print("Directory ", dirName, " Created ")
     else:
-        print("Directory ", dirName,  " already exists")
+        print("Directory ", dirName, " already exists")
 
     # Actual exportation, overwrites the file if it exists
     with open('output/%s.csv' % (filename), 'w') as f:

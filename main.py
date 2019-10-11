@@ -1,7 +1,7 @@
 import APIfunctions
 
 arg_searchterm = "chrome"
-arg_country = "gb" #us, gb, nl
+arg_country = "us"  # us, uk, nl
 app_results = APIfunctions.search_both_stores(
     arg_searchterm, arg_country)
 
