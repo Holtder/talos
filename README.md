@@ -8,7 +8,8 @@ Make sure you have Python (3.6.8) and pip3 installed. There are many tutorials o
 * Flask SQLAlchemy
 * WT Forms 
 
-You can install these all at the same time using
+You can install these all at the same time using either:
+
 `$ pip3 install -r requirements.txt`
 
 or 
