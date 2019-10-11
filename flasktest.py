@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 from forms import AppQuery
 
 # Configurations
@@ -20,10 +21,12 @@ class Job(db.Model):
     jobname = db.Column(db.String(30), nullable=True,
                         default='No jobname supplied')
     country_code = db.Column(db.String(2), nullable=False)
+    posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     terms = db.Column(db.String(), nullable=False)
+    results = db.Column(db.Integer(), nullable=True)
 
     def __repr__(self):
-        # A magic python function that is called when printing the instance
+        # A magic python function that is called when printing the class instance
         return f"Job: ({self.country_code}) {self.jobname} \n {self.terms}"
 
 # Route for the home page, have information about the Scraper here

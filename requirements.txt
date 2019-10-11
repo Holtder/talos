@@ -1,5 +1,4 @@
 play-scraper==0.5.5
-requests==2.22.0
 flask==1.1.1
 flask-wtf==0.14.2
 Flask-SQLAlchemy==2.4.1

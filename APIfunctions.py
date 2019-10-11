@@ -83,7 +83,6 @@ def android_search(searchquery, country_code='nl', pagerange=13):
                 results.append(newapp)
 
         else:
-            print('break')
             break
 
     print('Android total: %s' % total)
