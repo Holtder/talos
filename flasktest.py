@@ -24,10 +24,13 @@ def submitquery():
         return redirect(url_for('submitquery'))
     return render_template('submitquery.html', title='Submit a new Query', form=form)
 
-
 @app.route('/jobs')
 def jobs():
     return render_template('jobs.html', title='Current Jobs')
+
+@app.route('/about')
+def about():
+    return render_template('jobs.html', title="About us")
 
 if __name__ == '__main__':
     # Turn debug off when used on server!
