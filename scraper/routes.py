@@ -32,4 +32,3 @@ def jobs():
 @webapp.route('/about')
 def about():
     return render_template('jobs.html', title="About us")
-
