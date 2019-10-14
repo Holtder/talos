@@ -5,38 +5,45 @@ from forms import AppQuery
 
 # Configurations
 # Setting up the main object all the Flask functions as based on.
-app = Flask(__name__)
+webapp = Flask(__name__)
 # Config that allows data validation, any random string will do, this is a 16
 # character hex
-app.config['SECRET_KEY'] = '857de896a3ad275824157a245a057f5c'
+webapp.config['SECRET_KEY'] = '857de896a3ad275824157a245a057f5c'
 # URI (NOT URL) of the database, /// signifies a local path, this way we
 # dont need to set up an account
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+webapp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 # Allocation/instancing of the SQLAlchemy object
-db = SQLAlchemy(app)
+db = SQLAlchemy(webapp)
 
 
-class Job(db.Model):
+class dbJob(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     jobname = db.Column(db.String(30), nullable=True,
                         default='No jobname supplied')
     country_code = db.Column(db.String(2), nullable=False)
     posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     terms = db.Column(db.String(), nullable=False)
-    results = db.Column(db.Integer(), nullable=True)
+    results = db.Column(db.Integer, nullable=True)
+    apps = db.relationship('dbApp', backref='by_job', lazy=True)
 
     def __repr__(self):
         # A magic python function that is called when printing the class instance
         return f"Job: ({self.country_code}) {self.jobname} \n {self.terms}"
 
+class dbApp(db.Model):
+    job_id = db.Column(db.Integer, db.ForeignKey('db_job.id'), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+
+    
+
 # Route for the home page, have information about the Scraper here
-@app.route('/')
-@app.route('/home')
+@webapp.route('/')
+@webapp.route('/home')
 def home():
     return render_template('home.html', title='Home')
 
 # Route for the Submit Query page
-@app.route('/submitquery', methods=['GET', 'POST'])
+@webapp.route('/submitquery', methods=['GET', 'POST'])
 def submitquery():
     # Pull AppQuery from forms.py so it can be used as an argument
     form = AppQuery()
@@ -50,16 +57,16 @@ def submitquery():
                            form=form)
 
 
-@app.route('/jobs')
+@webapp.route('/jobs')
 def jobs():
     return render_template('jobs.html', title='Current Jobs')
 
 
-@app.route('/about')
+@webapp.route('/about')
 def about():
     return render_template('jobs.html', title="About us")
 
 
 if __name__ == '__main__':
     # Turn debug off when used on server!
-    app.run(debug=True)
+    webapp.run(debug=True)
