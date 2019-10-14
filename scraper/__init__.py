@@ -5,13 +5,25 @@ import time
 import os
 import csv
 import json
-import consts
+import scraper.consts
 from datetime import datetime
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
+# Configurations
+# Setting up the main object all the Flask functions as based on.
+webapp = Flask(__name__)
+# Config that allows data validation, any random string will do, this is a 16
+# character hex
+webapp.config['SECRET_KEY'] = '857de896a3ad275824157a245a057f5c'
+# URI (NOT URL) of the database, /// signifies a local path, this way we
+# dont need to set up an account
+webapp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+# Allocation/instancing of the SQLAlchemy object
+db = SQLAlchemy(webapp)
 # Illegal symbols that might corrupt the CSV output file
 illegal_price = ['$', '£', '€', ' ', '.', ',']
 illegal_desc = [('\r', ''), ('\n', ''), (';', ',')]
-
 
 class appresult:
     # Each instance of this object represents one result from the app-store queries
@@ -74,7 +86,7 @@ def android_search(searchquery, country_code='nl', pagerange=13):
         # If the size of the page is 0, ergo when it is empty, break off the loop
         if not len(response) == 0:
             for memb in response:
-                for keymemb in consts.android_key_list:
+                for keymemb in scraper.consts.android_key_list:
                     if keymemb not in memb:
                         memb[keymemb] = ''
                 newapp = appresult(memb['title'], 'android', memb['app_id'], memb['description'], memb['developer'], memb['developer_id'],
@@ -110,7 +122,7 @@ def apple_search(searchquery, country_code='nl'):
         # if the resultcount is less than 200, this is the last page
         i = -1 if response['resultCount'] < 200 else i + 1
         for memb in response['results']:
-            for keymemb in consts.apple_key_list:
+            for keymemb in scraper.consts.apple_key_list:
                 if keymemb not in memb:
                     memb[keymemb] = ''
 
