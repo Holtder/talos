@@ -6,7 +6,7 @@ import os
 import csv
 import json
 import scraper.consts
-from scraper.appstoreapi import android_search, apple_search
+from scraper.appstore import android_search, apple_search
 from datetime import datetime
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -58,6 +58,8 @@ def export_csv(app_list, filename="output"):
             f.write("%s;" % (app.fullprice))
             f.write("%s;" % (app.versionnumber))
             f.write("%s;" % (app.osreq))
-            f.write("%s;" % (app.latest_patch))
+            f.write("%s;" % (app.latest_patch.date()))
             f.write("%s" % (app.content_rating))
             f.write("\n")
+
+from scraper import routes

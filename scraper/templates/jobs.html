@@ -1,4 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-
+    {% for job in jobs %}
+        <h1>{{ job.jobname }}</h1>
+    {% endfor %}
 {% endblock content %}

@@ -1,4 +1,4 @@
-from flasksite import webapp
+from scraper import webapp
 
 if __name__ == '__main__':
     # Turn debug off when used on server!
