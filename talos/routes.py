@@ -1,8 +1,8 @@
-import threading
 from flask import render_template, url_for, flash, redirect
-from talos import webapp, db
+from talos import webapp, db, celery, search_appstores_task
 from talos.forms import AppQuery, JobAction
 from talos.models import dbApp, dbJob
+from celery.result import AsyncResult
 
 # Route for the home page, have information about the Scraper here
 @webapp.route('/')
@@ -18,7 +18,7 @@ def submitquery():
 
     # Run this code if the form was valid and completed
     if form.validate_on_submit():
-        job = dbJob(jobname=form.job_name.data, countrycode=form.shop_country.data, terms=form.query.data)
+        job = dbJob(jobname=form.job_name.data, countrycode=form.shop_country.data, terms=form.query.data, state="Waiting")
         db.session.add(job)
         db.session.commit()
 
@@ -37,6 +37,9 @@ def jobs():
         job = dbJob.query.get(jobactionform.jobnumber.data)
         if jobactionform.submitstart.data is True:
             job.state = "In Progress"
+            print("Calling task")
+            task = search_appstores_task.delay(job.terms, job.countrycode, job.id)
+            print(task.AsyncResult())
             flash(f'Job {job.id} successfully started!', 'success')
         elif jobactionform.submitcancel.data is True:
             db.session.delete(job)

@@ -9,7 +9,7 @@ class dbJob(db.Model):
     posted = db.Column(db.DateTime, nullable=False, default=datetime.now)
     terms = db.Column(db.String(), nullable=False)
     results = db.Column(db.Integer, nullable=True)
-    state = db.Column(db.String(), nullable=False, default="Waiting")
+    state = db.Column(db.String(), nullable=False)
     apps = db.relationship('dbApp', backref='by_job', lazy=True)
 
     def __repr__(self):

@@ -8,6 +8,7 @@ Next time:
 
 # AppStoreScraper
 ## Requirements
+### Python Packages
 Make sure you have Python (3.6.8) and pip3 installed. There are many tutorials online that do a far better job on how to accomplish this than I ever could. Once you get that done, install the following python packages:
 
 * Play Scraper
@@ -24,6 +25,9 @@ or
 
 `$ pip3 install play-scraper requests Flask Flask-SQLAlchemy WTForms`
 
+
+### Redis
+Besides python and the packages alongside it, you need a functioning Redis server running.
 
 ## Notes
 This is still a work in progress, proper installation instructions will follow.

@@ -5,6 +5,7 @@
     {% else %}
         <h1>Queue:</h1><hr>
         {% for job in jobs %}
+            {% print(job.state) %}
             {% if job.state == "Waiting" %}
                 <hr><h3>{{ job.id }}. {{ job.posted.strftime("%Y-%m-%d %H:%M:%S")}}: <i>{{ job.jobname }}</i></h3>
                 <p><b>Search terms ({{ job.countrycode}}):</b> "{{job.terms}}"</p>
@@ -26,6 +27,15 @@
             {% if job.state == "In Progress" %}
                 <hr><h3>{{ job.id }}. {{ job.posted.strftime("%Y-%m-%d %H:%M:%S")}}: <i>{{ job.jobname }}</i></h3>
                 <p><b>Search terms ({{ job.countrycode}}):</b> "{{job.terms}}"</p>
+                <br><br>
+            {% endif %}
+        {% endfor %}
+        <h1>Completed:</h1><hr>
+        {% for job in jobs %}
+            {% if job.state == "Complete" %}
+                <hr><h3>{{ job.id }}. {{ job.posted.strftime("%Y-%m-%d %H:%M:%S")}}: <i>{{ job.jobname }}</i></h3>
+                <p><b>Search terms ({{ job.countrycode}}):</b> "{{job.terms}}"</p>
+                <p><b>Results:</b> "{{job.results}}"</p>
                 <br><br>
             {% endif %}
         {% endfor %}

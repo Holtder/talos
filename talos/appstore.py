@@ -1,5 +1,7 @@
 import requests
 import play_scraper
+import os
+import csv
 from datetime import datetime
 from talos.consts import illegal_desc, illegal_price, android_key_list, apple_key_list
 
@@ -110,3 +112,40 @@ def apple_search(searchquery, country_code='nl'):
 
     print('Apple total:%s' % total)
     return results
+
+def search_appstores(arg_searchterm, arg_country):
+    # Using consts may seem redundant, but this allows one output to be applied differently where necessary
+    # This way there is room for the addition of other languages without adding too much work
+
+    results = android_search(arg_searchterm, arg_country, 1)
+    results += apple_search(arg_searchterm, arg_country)
+    return results
+
+
+# Function that exports a collection of appresult instances and allows for optional name specification
+def export_csv(app_list, filename="output"):
+    dirName = 'output'
+
+    # Create target directory if doesn't exist yet
+    if not os.path.exists(dirName):
+        os.mkdir(dirName)
+        print("Directory ", dirName, " Created ")
+    else:
+        print("Directory ", dirName, " already exists")
+
+    # Actual exportation, overwrites the file if it exists
+    with open('output/%s.csv' % (filename), 'w') as f:
+        f.write("bundleid;store;app_title;description;dev_name;dev_id;fullprice;versionnumber;osreq;latest_patch;content_rating\n")
+        for app in app_list:
+            f.write("%s;" % (app.bundleid))
+            f.write("%s;" % (app.store))
+            f.write("%s;" % (app.app_title))
+            f.write("%s;" % (app.description))
+            f.write("%s;" % (app.dev_name))
+            f.write("%s;" % (app.dev_id))
+            f.write("%s;" % (app.fullprice))
+            f.write("%s;" % (app.versionnumber))
+            f.write("%s;" % (app.osreq))
+            f.write("%s;" % (app.latest_patch.date()))
+            f.write("%s" % (app.content_rating))
+            f.write("\n")
