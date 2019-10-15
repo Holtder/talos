@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+    <h1>Queue:</h1>
     {% for job in jobs %}
         <h1>{{ job.jobname }}</h1>
     {% endfor %}
