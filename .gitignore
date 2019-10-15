@@ -122,3 +122,4 @@ output/*
 site.db
 .vscode/settings.json
 .env/
+dump.rdb

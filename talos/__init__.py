@@ -2,7 +2,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from celery import Celery
-from talos.appstore import search_appstores
+from datetime import datetime
+from talos.appstore import search_appstores, export_csv
 
 # Configurations
 # Setting up the main object all the Flask functions as based on.
@@ -31,7 +32,7 @@ def search_appstores_task(term, country, jobid):
     job = dbJob.query.get(jobid)
     results = search_appstores(term, country)
     for result in results:
-        newApp = dbApp(app_title=result.app_title,
+        newApp = dbApp(app_title=str(result.app_title),
                        store=result.store,
                        bundleid=result.bundleid,
                        description=result.description,
@@ -40,14 +41,17 @@ def search_appstores_task(term, country, jobid):
                        fullprice=result.fullprice,
                        versionnumber=result.versionnumber,
                        osreq=result.osreq,
-                       latest_patch=result.latest_patch,
-                       content_rating=result.content_rating,
+                       latest_patch=str(result.latest_patch.date()),
+                       content_rating=result.content_rating[0],
                        job_id=jobid)
         db.session.add(newApp)
         db.session.commit()
-    job.results = results.len()
+    job.results = len(results)
     job.state = "Complete"
+    db.session.add(job)
+    db.session.commit()
+    export_csv(results, jobid)
     print(f"Completed Task for Job({job.id}), found {job.results} apps.")
-    return db.db_app.filter_by(job_id=jobid)
+    return 1
 
 from talos import routes

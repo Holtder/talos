@@ -27,6 +27,6 @@ class dbApp(db.Model):
     fullprice = db.Column(db.Integer, nullable=False)
     versionnumber = db.Column(db.String(), nullable=False)
     osreq = db.Column(db.String(), nullable=False)
-    latest_patch = db.Column(db.DateTime, nullable=False)
+    latest_patch = db.Column(db.String(), nullable=False)
     content_rating = db.Column(db.String(), nullable=False)
     job_id = db.Column(db.Integer, db.ForeignKey('db_job.id'), nullable=False)

@@ -28,7 +28,6 @@ def submitquery():
     return render_template('submitquery.html', title='Submit a new Query',
                            form=form)
 
-
 @webapp.route('/jobs', methods=['GET', 'POST'])
 def jobs():
     jobactionform = JobAction()
@@ -37,9 +36,9 @@ def jobs():
         job = dbJob.query.get(jobactionform.jobnumber.data)
         if jobactionform.submitstart.data is True:
             job.state = "In Progress"
+            db.session.commit()
             print("Calling task")
             task = search_appstores_task.delay(job.terms, job.countrycode, job.id)
-            print(task.AsyncResult())
             flash(f'Job {job.id} successfully started!', 'success')
         elif jobactionform.submitcancel.data is True:
             db.session.delete(job)
