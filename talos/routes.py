@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, redirect
-from scraper import webapp, db
-from scraper.forms import AppQuery
-from scraper.models import dbApp, dbJob
+from talos import webapp, db
+from talos.forms import AppQuery
+from talos.models import dbApp, dbJob
 
 # Route for the home page, have information about the Scraper here
 @webapp.route('/')

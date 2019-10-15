@@ -1,5 +1,5 @@
 from datetime import datetime
-from scraper import db
+from talos import db
 
 class dbJob(db.Model):
     id = db.Column(db.Integer, primary_key=True)

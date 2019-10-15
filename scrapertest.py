@@ -1,9 +1,9 @@
-import scraper
+import talos
 
 # Some Constants
 SEARCHTERM = "infection prevention"
 COUNTRY = "us"  # us, uk, nl
 
-app_results = scraper.search_appstores(SEARCHTERM, COUNTRY)
+app_results = talos.search_appstores(SEARCHTERM, COUNTRY)
 
-scraper.export_csv(app_results, "output")
+talos.export_csv(app_results, "output")

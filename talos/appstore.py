@@ -1,7 +1,7 @@
 import requests
 import play_scraper
 from datetime import datetime
-from scraper.consts import illegal_desc, illegal_price, android_key_list, apple_key_list
+from talos.consts import illegal_desc, illegal_price, android_key_list, apple_key_list
 
 class appresult:
     # Each instance of this object represents one result from the app-store queries

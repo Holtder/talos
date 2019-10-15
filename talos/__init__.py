@@ -5,8 +5,8 @@ import time
 import os
 import csv
 import json
-import scraper.consts
-from scraper.appstore import android_search, apple_search
+import talos.consts
+from talos.appstore import android_search, apple_search
 from datetime import datetime
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -62,4 +62,4 @@ def export_csv(app_list, filename="output"):
             f.write("%s" % (app.content_rating))
             f.write("\n")
 
-from scraper import routes
+from talos import routes
