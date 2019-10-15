@@ -35,7 +35,7 @@
                 <hr><h3>{{ job.id }}. {{ job.posted.strftime("%Y-%m-%d %H:%M:%S")}}: <i>{{ job.jobname }}</i></h3>
                 <p><b>Search terms ({{ job.countrycode }}):</b> "{{job.terms}}"</p>
                 <p><b>Results:</b> {{ job.results }}</p>
-                <p><b>Download:</b><a href="output/{{ job.id }}.csv">CSV</a></p>
+                <p><b>Download:</b><br><a class="btn btn-outline-info" href="output/{{ job.id }}.csv">CSV</a></p>
                 <br><br>
             {% endif %}
         {% endfor %}

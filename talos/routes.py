@@ -28,6 +28,7 @@ def submitquery():
     return render_template('submitquery.html', title='Submit a new Query',
                            form=form)
 
+# This page shows all waiting, running and completed jobs and allows the user to download results
 @webapp.route('/jobs', methods=['GET', 'POST'])
 def jobs():
     jobactionform = JobAction()
