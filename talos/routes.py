@@ -1,6 +1,7 @@
+import threading
 from flask import render_template, url_for, flash, redirect
 from talos import webapp, db
-from talos.forms import AppQuery
+from talos.forms import AppQuery, JobAction
 from talos.models import dbApp, dbJob
 
 # Route for the home page, have information about the Scraper here
@@ -28,11 +29,22 @@ def submitquery():
                            form=form)
 
 
-@webapp.route('/jobs')
+@webapp.route('/jobs', methods=['GET', 'POST'])
 def jobs():
+    jobactionform = JobAction()
+
+    if jobactionform.validate_on_submit():
+        job = dbJob.query.get(jobactionform.jobnumber.data)
+        if jobactionform.submitstart.data is True:
+            job.state = "In Progress"
+            flash(f'Job {job.id} successfully started!', 'success')
+        elif jobactionform.submitcancel.data is True:
+            db.session.delete(job)
+            db.session.commit()
+            flash(f'Job {job.id} successfully cancelled!', 'success')
+
     jobs = dbJob.query.all()
-    print(jobs[0].jobname)
-    return render_template('jobs.html', title='Current Jobs', jobs=jobs)
+    return render_template('jobs.html', title='Current Jobs', jobs=jobs, jobactionform=jobactionform)
 
 
 @webapp.route('/about')

@@ -6,7 +6,7 @@ class dbJob(db.Model):
     jobname = db.Column(db.String(30), nullable=True,
                         default='No jobname supplied')
     countrycode = db.Column(db.String(2), nullable=False)
-    posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    posted = db.Column(db.DateTime, nullable=False, default=datetime.now)
     terms = db.Column(db.String(), nullable=False)
     results = db.Column(db.Integer, nullable=True)
     state = db.Column(db.String(), nullable=False, default="Waiting")

@@ -24,6 +24,9 @@ webapp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'True'
 
 # Allocation/instancing of the SQLAlchemy object
 db = SQLAlchemy(webapp)
+from talos.models import dbApp, dbJob
+db.create_all()
+
 
 def search_appstores(arg_searchterm, arg_country):
     # Using consts may seem redundant, but this allows one output to be applied differently where necessary

@@ -1,7 +1,33 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Queue:</h1>
-    {% for job in jobs %}
-        <h1>{{ job.jobname }}</h1>
-    {% endfor %}
+    {% if not jobs %}
+        <hr><h2> No jobs submitted. </h2>
+    {% else %}
+        <h1>Queue:</h1><hr>
+        {% for job in jobs %}
+            {% if job.state == "Waiting" %}
+                <hr><h3>{{ job.id }}. {{ job.posted.strftime("%Y-%m-%d %H:%M:%S")}}: <i>{{ job.jobname }}</i></h3>
+                <p><b>Search terms ({{ job.countrycode}}):</b> "{{job.terms}}"</p>
+                <form method="POST" action="">
+                    {{ jobactionform.hidden_tag() }}
+                    <div class="form-group" style="display: none;">
+                        {{ jobactionform.jobnumber(value=job.id) }}
+                    </div>
+                    <div class="form-group">
+                        {{ jobactionform.submitstart(class="btn btn-outline-info") }}
+                        {{ jobactionform.submitcancel(class="btn btn-outline-info") }}
+                    </div>
+                </form>
+                <br><br>
+            {% endif %}
+        {% endfor %}
+        <h1>In Progress:</h1><hr>
+        {% for job in jobs %}
+            {% if job.state == "In Progress" %}
+                <hr><h3>{{ job.id }}. {{ job.posted.strftime("%Y-%m-%d %H:%M:%S")}}: <i>{{ job.jobname }}</i></h3>
+                <p><b>Search terms ({{ job.countrycode}}):</b> "{{job.terms}}"</p>
+                <br><br>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock content %}
