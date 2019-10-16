@@ -13,4 +13,4 @@ class AppQuery(FlaskForm):
 class JobAction(FlaskForm):
     jobnumber = IntegerField('Job Number:', validators=[DataRequired()])
     submitstart = SubmitField('Start')
-    submitcancel = SubmitField('Cancel')
+    submitcancel = SubmitField('Delete')

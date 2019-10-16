@@ -124,17 +124,17 @@ def search_appstores(arg_searchterm, arg_country):
 
 # Function that exports a collection of appresult instances and allows for optional name specification
 def export_csv(app_list, filename="output"):
-    dirName = 'output'
+    dirName = 'talos/static/output/'
 
     # Create target directory if doesn't exist yet
     if not os.path.exists(dirName):
-        os.mkdir(dirName)
+        os.makedirs(dirName)
         print("Directory ", dirName, " Created ")
     else:
         print("Directory ", dirName, " already exists")
 
     # Actual exportation, overwrites the file if it exists
-    with open('output/%s.csv' % (filename), 'w') as f:
+    with open(f'{dirName}/{filename}.csv', 'w') as f:
         f.write("bundleid;store;app_title;description;dev_name;dev_id;fullprice;versionnumber;osreq;latest_patch;content_rating\n")
         for app in app_list:
             f.write("%s;" % (app.bundleid))

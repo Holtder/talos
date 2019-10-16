@@ -1,3 +1,4 @@
+import os
 from flask import render_template, url_for, flash, redirect
 from talos import webapp, db, celery, search_appstores_task
 from talos.forms import AppQuery, JobAction
@@ -42,6 +43,14 @@ def jobs():
             task = search_appstores_task.delay(job.terms, job.countrycode, job.id)
             flash(f'Job {job.id} successfully started!', 'success')
         elif jobactionform.submitcancel.data is True:
+            jobApps = dbApp.query.filter_by(job_id=job.id)
+            for res in jobApps:
+                db.session.delete(res)
+            outputPath = f'talos/static/output/{job.id}.csv'
+            try:
+                os.remove(outputPath)
+            except Exception as ex:
+                print("Error while deleting file ", outputPath)
             db.session.delete(job)
             db.session.commit()
             flash(f'Job {job.id} successfully cancelled!', 'success')

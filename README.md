@@ -1,33 +1,34 @@
-# Note to self, when developing on new device:
-`$ pip3 install virtualenv`
-`$ virtualenv --no-site-packages --distribute .env && source .env/bin/activate && pip install -r requirements.txt`
+These notes are still very much a WiP; it was developed on Ubuntu 18.04 in Python 3.6
 
-Next time:
-
-`& source .env/bin/activate`
-
-# AppStoreScraper
-## Requirements
-### Python Packages
-Make sure you have Python (3.6.8) and pip3 installed. There are many tutorials online that do a far better job on how to accomplish this than I ever could. Once you get that done, install the following python packages:
+# Install instructions:
+Decide for youself if you want to install all required packages in a venv or not, all version requirements are listed in requirements.txt
 
 * Play Scraper
 * requests
 * Flask
 * Flask SQLAlchemy
-* WT Forms 
-
-You can install these all at the same time using either:
-
-`$ pip3 install -r requirements.txt`
-
-or 
-
-`$ pip3 install play-scraper requests Flask Flask-SQLAlchemy WTForms`
+* WT Forms
 
 
-### Redis
-Besides python and the packages alongside it, you need a functioning Redis server running.
+Make sure you have the following installed:
 
-## Notes
-This is still a work in progress, proper installation instructions will follow.
+* Python 3.6 `sudo apt-get install redis-server`
+* Redis `sudo apt-get install redis-server`
+
+# Before using
+Start redis and celery from the terminal
+
+* `$ redis-server`
+* `$ celery -A talos.celery worker`
+
+# Usage
+Start the Flask Server 
+
+`$ python3 run.py`
+
+Or if you are using a virtual environment:
+
+`$ source venvname/bin/activate && python run.py`
+
+
+You can now find Talos on '127.0.0.1:5000' in your preferred browser.
