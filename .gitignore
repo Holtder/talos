@@ -119,3 +119,7 @@ dmypy.json
 # Personal ignore:
 ### Output files ##
 output/*
+site.db
+.vscode/settings.json
+.env/
+dump.rdb
