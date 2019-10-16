@@ -6,8 +6,10 @@ Decide for youself if you want to install all required packages in a venv or not
 * Play Scraper
 * requests
 * Flask
-* Flask SQLAlchemy
-* WT Forms
+* Flask-WTF
+* Flask-SQLAlchemy
+* Celery
+* Redis
 
 
 Make sure you have the following installed:
