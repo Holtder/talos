@@ -12,7 +12,7 @@ Decide for youself if you want to install all required packages in a venv or not
 
 Make sure you have the following installed:
 
-* Python 3.6 `sudo apt-get install redis-server`
+* Python 3.6
 * Redis `sudo apt-get install redis-server`
 
 # Before using
