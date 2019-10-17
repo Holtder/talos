@@ -18,7 +18,7 @@ class appresult:
         Because the list of given arguments is variable, this code crossreferences the arguments
         With a list of appstore-specific arguments. Based on that, a non-specific key is assigned to the value.
         That way the rest of the code can run universally.
-        i represents the appstore (0: android, 1: apple)
+        i represents the type of input (0: android search query, 1: apple search query, 2: database record)
         """
         i = 0
         kwargDict = {}
@@ -98,7 +98,7 @@ class appresult:
         return resultsDict
 
 
-def android_search(searchquery, country_code='nl', pagerange=13):
+def android_search(searchquery, country_code, pagerange=13):
     """ Android Search Query, using the play-scraper package """
     results = []
     total = 0
@@ -107,7 +107,6 @@ def android_search(searchquery, country_code='nl', pagerange=13):
     for i in range(0, pagerange):
         response = play_scraper.search(
             searchquery, i, True, 'en', country_code)
-
         # If the size of the page is 0, ergo when it is empty, break off the loop
         if not len(response) == 0:
             for memb in response:
@@ -125,7 +124,7 @@ def android_search(searchquery, country_code='nl', pagerange=13):
     return results
 
 
-def apple_search(searchquery, country_code='nl'):
+def apple_search(searchquery, country_code):
     """ Apple Search Query, using the official iTunes API """
     results = []
     total = 0
@@ -150,7 +149,7 @@ def apple_search(searchquery, country_code='nl'):
                 if keymemb not in memb:
                     memb[keymemb] = ''
 
-            newapp = appresult(appresult.Source.Android, **memb)
+            newapp = appresult(appresult.Source.Apple, **memb)
             total += 1
             results.append(newapp)
 
