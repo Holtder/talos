@@ -5,3 +5,32 @@ android_key_list = ['title', 'android', 'app_id', 'description', 'developer', 'd
 # Illegal symbols that might corrupt the CSV output file
 illegal_price = ['$', '£', '€', ' ', '.', ',']
 illegal_desc = [('\r', ''), ('\n', ''), (';', ',')]
+
+keysDict = [
+    # Android keys dictionary
+    {
+        'title': 'app_title',
+        'app_id': 'bundleid',
+        'description': 'description',
+        'developer': 'dev_name',
+        'developer_id': 'dev_id',
+        'price': 'fullprice',
+        'current_version': 'versionnumber',
+        'required_android_version': 'osreq',
+        'updated': 'latest_patch',
+        'content_rating': 'content_rating'
+    },
+    # Apple keys dictionary
+    {
+        'trackName': 'app_title',
+        'bundleId': 'bundleid',
+        'description': 'description',
+        'artistName': 'dev_name',
+        'artistId': 'dev_id',
+        'price': 'fullprice',
+        'version': 'versionnumber',
+        'minimumOsVersion': 'osreq',
+        'currentVersionReleaseDate': 'latest_patch',
+        'trackContentRating': 'content_rating'
+    }
+]
