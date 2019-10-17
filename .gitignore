@@ -122,4 +122,6 @@ output/*
 site.db
 .vscode/settings.json
 .env/
+venv/
 dump.rdb
+feedback.txt

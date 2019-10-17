@@ -1,7 +1,11 @@
 from datetime import datetime
-from talos import db
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
 
 class dbJob(db.Model):
+    """ Database model representing a Job """
     id = db.Column(db.Integer, primary_key=True)
     jobname = db.Column(db.String(30), nullable=True,
                         default='No jobname supplied')
@@ -12,11 +16,9 @@ class dbJob(db.Model):
     state = db.Column(db.String(), nullable=False)
     apps = db.relationship('dbApp', backref='by_job', lazy=True)
 
-    def __repr__(self):
-        # A magic python function that is called when printing the class instance
-        return f"Job: ({self.country_code}) {self.jobname} \n {self.terms}"
 
 class dbApp(db.Model):
+    """ Database model representing one result of Job query """
     id = db.Column(db.Integer, primary_key=True)
     app_title = db.Column(db.String(), nullable=False)
     store = db.Column(db.String(), nullable=False)

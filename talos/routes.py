@@ -1,18 +1,19 @@
 import os
-from flask import render_template, url_for, flash, redirect
-from talos import webapp, db, celery, search_appstores_task
-from talos.forms import AppQuery, JobAction
-from talos.models import dbApp, dbJob
-from celery.result import AsyncResult
+from flask import render_template, url_for, flash, redirect, Blueprint
+from .tasks import search_appstores_task
+from .forms import AppQuery, JobAction
+from .models import db, dbApp, dbJob
+
+talosBP = Blueprint("Talos", __name__)
 
 # Route for the home page, have information about the Scraper here
-@webapp.route('/')
-@webapp.route('/home')
+@talosBP.route('/')
+@talosBP.route('/home')
 def home():
     return render_template('home.html', title='Home')
 
 # Route for the Submit Query page
-@webapp.route('/submitquery', methods=['GET', 'POST'])
+@talosBP.route('/submitquery', methods=['GET', 'POST'])
 def submitquery():
     # Pull AppQuery from forms.py so it can be used as an argument
     form = AppQuery()
@@ -25,12 +26,12 @@ def submitquery():
 
         # Set flash message to notify user of succesfull query submission.
         flash(f'Job {form.job_name.data} successfully submitted!', 'success')
-        return redirect(url_for('jobs'))
+        return redirect(url_for('Talos.jobs'))
     return render_template('submitquery.html', title='Submit a new Query',
                            form=form)
 
 # This page shows all waiting, running and completed jobs and allows the user to download results
-@webapp.route('/jobs', methods=['GET', 'POST'])
+@talosBP.route('/jobs', methods=['GET', 'POST'])
 def jobs():
     jobactionform = JobAction()
 
@@ -49,7 +50,7 @@ def jobs():
             outputPath = f'talos/static/output/{job.id}.csv'
             try:
                 os.remove(outputPath)
-            except Exception as ex:
+            except:
                 print("Error while deleting file ", outputPath)
             db.session.delete(job)
             db.session.commit()
@@ -59,6 +60,6 @@ def jobs():
     return render_template('jobs.html', title='Current Jobs', jobs=jobs, jobactionform=jobactionform)
 
 
-@webapp.route('/about')
+@talosBP.route('/about')
 def about():
     return render_template('jobs.html', title="About us")
