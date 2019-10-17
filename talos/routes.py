@@ -42,7 +42,7 @@ def jobs():
         job = dbJob.query.get(jobactionform.jobnumber.data)
         if jobactionform.submitstart.data is True:
             dbJob.start(job.id)
-            flash(f'Job {job.id} successfully started!', 'success')
+            flash(f'Job {job.id} successfully started! This WILL take a few minutes, grab some coffee!', 'success')
         elif jobactionform.submitcancel.data is True:
             dbJob.cancel(job.id)
             flash(f'Job {job.id} successfully canceled!', 'success')

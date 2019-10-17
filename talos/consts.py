@@ -48,6 +48,5 @@ keysDict = [
         'osreq': 'osreq',
         'latest_patch': 'latest_patch',
         'content_rating': 'content_rating'
-    },
-
+    }
 ]
