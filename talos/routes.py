@@ -1,20 +1,22 @@
-import os
 from flask import render_template, url_for, flash, redirect, Blueprint
-from .tasks import search_appstores_task
 from .forms import AppQuery, JobAction
-from .models import db, dbApp, dbJob
+from .models import db, dbJob
 
-talosBP = Blueprint("Talos", __name__)
+talosBP = Blueprint("Talos", __name__, static_folder='static', static_url_path='/static')
 
-# Route for the home page, have information about the Scraper here
+
 @talosBP.route('/')
 @talosBP.route('/home')
 def home():
+    """ Route for the home page, have information about the Scraper here """
+
     return render_template('home.html', title='Home')
 
-# Route for the Submit Query page
+
 @talosBP.route('/submitquery', methods=['GET', 'POST'])
 def submitquery():
+    """ # Route for the Submit Query page """
+
     # Pull AppQuery from forms.py so it can be used as an argument
     form = AppQuery()
 
@@ -30,34 +32,32 @@ def submitquery():
     return render_template('submitquery.html', title='Submit a new Query',
                            form=form)
 
-# This page shows all waiting, running and completed jobs and allows the user to download results
+
 @talosBP.route('/jobs', methods=['GET', 'POST'])
 def jobs():
+    """ This page shows all waiting, running and completed jobs and allows the user to download results """
     jobactionform = JobAction()
 
     if jobactionform.validate_on_submit():
         job = dbJob.query.get(jobactionform.jobnumber.data)
         if jobactionform.submitstart.data is True:
-            job.state = "In Progress"
-            db.session.commit()
-            print("Calling task")
-            task = search_appstores_task.delay(job.terms, job.countrycode, job.id)
+            dbJob.start(job.id)
             flash(f'Job {job.id} successfully started!', 'success')
         elif jobactionform.submitcancel.data is True:
-            jobApps = dbApp.query.filter_by(job_id=job.id)
-            for res in jobApps:
-                db.session.delete(res)
-            outputPath = f'talos/static/output/{job.id}.csv'
-            try:
-                os.remove(outputPath)
-            except:
-                print("Error while deleting file ", outputPath)
-            db.session.delete(job)
-            db.session.commit()
-            flash(f'Job {job.id} successfully cancelled!', 'success')
+            dbJob.cancel(job.id)
+            flash(f'Job {job.id} successfully canceled!', 'success')
+        elif jobactionform.submitdelete.data is True:
+            dbJob.delete(job.id)
+            flash(f'Job {job.id} successfully deleted!', 'success')
 
     jobs = dbJob.query.all()
     return render_template('jobs.html', title='Current Jobs', jobs=jobs, jobactionform=jobactionform)
+
+
+@talosBP.route('/results<jobid>.<type>')
+def results(type, jobid):
+    dbJob.export(jobid, type)
+    return talosBP.send_static_file(f'output/results.{type}')
 
 
 @talosBP.route('/about')

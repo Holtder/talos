@@ -1,29 +1,42 @@
 import requests
 import play_scraper
-import os
-import csv
+import enum
 from datetime import datetime
 from .consts import illegal_desc, illegal_price, android_key_list, apple_key_list, keysDict
 
 
 class appresult:
+    class Source(enum.Enum):
+        Android = 0
+        Apple = 1
+        Database = 2
     """ Each instance of this object represents one result from the app-store queries
     Both APIs return a range of data but the variables used here are the ones that are returned by both
     """
-    def __init__(self, store, **kwargs):
+    def __init__(self, source, **kwargs):
         """
         Because the list of given arguments is variable, this code crossreferences the arguments
         With a list of appstore-specific arguments. Based on that, a non-specific key is assigned to the value.
         That way the rest of the code can run universally.
         i represents the appstore (0: android, 1: apple)
         """
-
+        i = 0
         kwargDict = {}
-        self.store = store
-        i = 0 if self.store == 'android' else 1
+        if source == self.Source.Android:
+            self.store = 'android'
+            i = 0
+        elif source == self.Source.Apple:
+            self.store = 'apple'
+            i = 1
+        elif source == self.Source.Database:
+            i = 2
+
         for key, value in kwargs.items():
             if key in keysDict[i]:
                 kwargDict[keysDict[i][key]] = value
+
+        if i == 2:
+            self.store = kwargDict['store']
 
         self.app_title = kwargDict['app_title']
         self.bundleid = kwargDict['bundleid']
@@ -57,20 +70,22 @@ class appresult:
         self.fullprice = self.fullprice.strip()
 
         self.latest_patch = kwargDict['latest_patch']
-        if self.latest_patch is not None:
-            if self.store == "android":
-                # Example: June 3, 2019 to 2019-06-03
-                self.latest_patch = datetime.strptime(self.latest_patch, "%B %d, %Y")
-            elif self.store == "apple":
-                # Example: 2014-07-15T15:08:56Z to 2014-07-15
-                self.latest_patch = datetime.strptime(self.latest_patch[0:10], "%Y-%m-%d")
-        else:
-            self.latest_patch = datetime.strptime("1808-08-08", "%Y-%m-%d")
+        if source != self.Source.Database:
+            if self.latest_patch is not None:
+                if self.store == "android":
+                    # Example: June 3, 2019 to 2019-06-03
+                    self.latest_patch = datetime.strptime(self.latest_patch, "%B %d, %Y")
+                elif self.store == "apple":
+                    # Example: 2014-07-15T15:08:56Z to 2014-07-15
+                    self.latest_patch = datetime.strptime(self.latest_patch[0:10], "%Y-%m-%d")
+            else:
+                self.latest_patch = datetime.strptime("1808-08-08", "%Y-%m-%d")
 
     def dict(self):
         resultsDict = {
             'app_title': self.app_title,
             'bundleid': self.bundleid,
+            'store': self.store,
             'description': self.description,
             'dev_name': self.dev_name,
             'dev_id': self.dev_id,
@@ -99,7 +114,7 @@ def android_search(searchquery, country_code='nl', pagerange=13):
                 for keymemb in android_key_list:
                     if keymemb not in memb:
                         memb[keymemb] = ''
-                newapp = appresult('android', **memb)
+                newapp = appresult(appresult.Source.Android, **memb)
                 total += 1
                 results.append(newapp)
 
@@ -135,7 +150,7 @@ def apple_search(searchquery, country_code='nl'):
                 if keymemb not in memb:
                     memb[keymemb] = ''
 
-            newapp = appresult('apple', **memb)
+            newapp = appresult(appresult.Source.Android, **memb)
             total += 1
             results.append(newapp)
 
@@ -151,21 +166,3 @@ def search_appstores(arg_searchterm, arg_country):
     results = android_search(arg_searchterm, arg_country, 1)
     results += apple_search(arg_searchterm, arg_country)
     return results
-
-
-def export_csv(app_list, filename="output"):
-    """ Function that exports a collection of appresult instances and allows for optional name specification"""
-    dirName = 'talos/static/output/'
-
-    # Create target directory if doesn't exist yet
-    if not os.path.exists(dirName):
-        os.makedirs(dirName)
-        print(f"Directory {dirName} Created ")
-    else:
-        print(f"Directory {dirName} already exists")
-
-    with open(f'{dirName}/{filename}.csv', 'w') as exportFile:
-        writer = csv.DictWriter(exportFile, delimiter=';', quoting=csv.QUOTE_MINIMAL, fieldnames=[*app_list[0].dict()])
-        writer.writeheader()
-        for app in app_list:
-            writer.writerow(app.dict())

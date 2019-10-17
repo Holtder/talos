@@ -1,6 +1,5 @@
 from celery import Celery
-from .appstore import search_appstores, export_csv
-from .models import db, dbJob, dbApp
+from .appstore import search_appstores
 from .appfactory import DevelopmentConfig as Config
 
 celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
@@ -9,6 +8,7 @@ celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 @celery.task
 def search_appstores_task(term, country, jobid):
     from . import app
+    from .models import db, dbJob, dbApp
     with app.app_context():
         # Gets the job object from the ID that is passed
         job = dbJob.query.get(jobid)
@@ -33,8 +33,7 @@ def search_appstores_task(term, country, jobid):
 
         # For clarity on the webpage the total amount of results is stored
         job.results = len(results)
-        job.state = "Complete"
+        job.state = job.state.Finished
         db.session.add(job)
         db.session.commit()
-        export_csv(results, jobid)
     return  # No need to actually return anything

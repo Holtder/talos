@@ -5,7 +5,7 @@
     {% else %}
         <h1>Queue:</h1><hr>
         {% for job in jobs %}
-            {% if job.state == "Waiting" %}
+            {% if job.state == job.state.Waiting %}
                 <hr><h3>{{ job.id }}. {{ job.posted.strftime("%Y-%m-%d %H:%M:%S")}}: <i>{{ job.jobname }}</i></h3>
                 <p><b>Search terms ({{ job.countrycode}}):</b> "{{job.terms}}"</p>
                 <form method="POST" action="">
@@ -23,7 +23,7 @@
         {% endfor %}
         <h1>In Progress:</h1><hr>
         {% for job in jobs %}
-            {% if job.state == "In Progress" %}
+            {% if job.state == job.state.Running %}
                 <hr><h3>{{ job.id }}. {{ job.posted.strftime("%Y-%m-%d %H:%M:%S")}}: <i>{{ job.jobname }}</i></h3>
                 <p><b>Search terms ({{ job.countrycode}}):</b> "{{job.terms}}"</p>
                 <br><br>
@@ -31,7 +31,7 @@
         {% endfor %}
         <h1>Completed:</h1><hr>
         {% for job in jobs %}
-            {% if job.state == "Complete" %}
+            {% if job.state == job.state.Finished %}
                 <hr><h3>{{ job.id }}. {{ job.posted.strftime("%Y-%m-%d %H:%M:%S")}}: <i>{{ job.jobname }}</i></h3>
                 <p><b>Search terms ({{ job.countrycode }}):</b> "{{job.terms}}"</p>
                 <p><b>Results:</b> {{ job.results }}</p>
@@ -42,8 +42,12 @@
                         {{ jobactionform.jobnumber(value=job.id) }}
                     </div>
                     <div class="form-group">
-                        <p><b>Download:</b><br><a class="btn btn-outline-info" href="{{ url_for('static', filename='output/%s.csv' % job.id) }}">CSV</a></p>
-                        {{ jobactionform.submitcancel(class="btn btn-outline-info") }}
+                        <p><b>Download:</b></p>
+                        <p>    
+                            <a class="btn btn-outline-info" href="{{ url_for('Talos.results', jobid=job.id, type='CSV') }}">CSV</a>
+                            <a class="btn btn-outline-info" href="{{ url_for('Talos.results', jobid=job.id, type='JSON') }}">JSON</a>
+                        </p>
+                        {{ jobactionform.submitdelete(class="btn btn-outline-info") }}
                     </div>
                 </form>
             {% endif %}

@@ -11,6 +11,7 @@ keysDict = [
     {
         'title': 'app_title',
         'app_id': 'bundleid',
+        'store': 'store',
         'description': 'description',
         'developer': 'dev_name',
         'developer_id': 'dev_id',
@@ -24,6 +25,7 @@ keysDict = [
     {
         'trackName': 'app_title',
         'bundleId': 'bundleid',
+        'store': 'store',
         'description': 'description',
         'artistName': 'dev_name',
         'artistId': 'dev_id',
@@ -32,5 +34,20 @@ keysDict = [
         'minimumOsVersion': 'osreq',
         'currentVersionReleaseDate': 'latest_patch',
         'trackContentRating': 'content_rating'
-    }
+    },
+    # Database keys dictionary
+    {
+        'app_title': 'app_title',
+        'bundleid': 'bundleid',
+        'store': 'store',
+        'description': 'description',
+        'dev_name': 'dev_name',
+        'dev_id': 'dev_id',
+        'fullprice': 'fullprice',
+        'versionnumber': 'versionnumber',
+        'osreq': 'osreq',
+        'latest_patch': 'latest_patch',
+        'content_rating': 'content_rating'
+    },
+
 ]

@@ -125,3 +125,4 @@ site.db
 venv/
 dump.rdb
 feedback.txt
+static/output/
