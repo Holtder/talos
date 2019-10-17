@@ -1,11 +1,12 @@
 from flask import Flask
 from .middleware import activate_middleware
+import secrets
 
 
 class DevelopmentConfig(object):
     DEBUG = True
     DEVELOPMENT = True
-    SECRET_KEY = '857de896a3ad275824157a245a057f5c'
+    SECRET_KEY = secrets.token_hex(16)
     FLASK_SECRET = SECRET_KEY
     SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = 'True'
