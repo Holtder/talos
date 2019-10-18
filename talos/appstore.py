@@ -28,7 +28,7 @@ class appresult:
         i represents the type of input (0: android search query, 1: apple search query, 2: database record)
         """
 
-        """ 
+        """TM
         Why would you still use this i as a number? Use Source.Android, Source.Apple and 
         Source.Database everywhere. Magic numbers are not fun.
 
@@ -79,7 +79,7 @@ class appresult:
         self.osreq = kwargDict['osreq']
         self.content_rating = kwargDict['content_rating']
 
-        """TM
+        """
         Dev name formatting: in some languages there is no dev name, only an ID
         In that case, it gets defaulted to 'Google Commerce Ltd', which will be converted to n/a
         But only if the dev ID is not google's
