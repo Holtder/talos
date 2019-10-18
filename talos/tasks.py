@@ -2,6 +2,34 @@ from celery import Celery
 from .appstore import search_appstores
 from .appfactory import DevelopmentConfig as Config
 
+"""TM
+You can use 
+celery = Celery(__name__, autofinalize=False)
+to support configuring celery later in middleware:
+celery.conf.update(app.config)
+You will also need to create a celery entrypoint. From the make_app return both a flaskapp and celeryap
+
+# entrypoint.py
+from talos.appfactory import make_app
+from talos.config import DevelopmentConfig
+
+flask_app, celery_app = make_app(DevelopmentConfig)
+
+if __name__ == "__main__":
+    flask_app.run()
+
+
+Also a good idea for the app context (you can do this in middleware):
+TaskBase = celery.Task
+class AppContextTask(TaskBase):
+    abstract = True
+    def __call__(self, *args, **kwargs):
+        with app.app_context():
+            return TaskBase.__call__(self, *args, **kwargs)
+celery.Task = AppContextTask
+
+See https://github.com/zenyui/celery-flask-factory for a super clean example
+"""
 celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 
 # The one task in celery, unfortunately cannot be put into another module

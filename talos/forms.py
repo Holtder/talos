@@ -2,6 +2,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Length
 
+"""TM
+If you are going to put consts in a separate file, then put all of them there
+"""
 COUNTRY_ABBREV = [('us', 'United States'), ('gb', 'Great Britain'), ('nl', 'The Netherlands')]
 
 

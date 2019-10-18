@@ -6,6 +6,30 @@ import os
 import csv
 import json
 from .appstore import appresult
+"""TM
+I usually order my imports
+
+standard library imports
+#one enter
+dependency imports
+#one enter
+internal imports
+#two enters
+
+This might be my OCD... Anyway, here it would be:
+
+from datetime import datetime
+import json
+import enum
+import csv
+import os
+
+from flask_sqlalchemy import SQLAlchemy
+
+from .tasks import search_appstore_task
+from .appstore import appresult
+"""
+
 
 db = SQLAlchemy()
 
@@ -76,6 +100,35 @@ class dbJob(db.Model):
 
     @classmethod
     def export(cls, jobnumber, filetype):
+        """TM
+        Readability could be improved here with:
+
+        from sqlalchemy import inspect
+
+        function dict(self):
+            return {
+                column.key: getattr(self, column.key)
+                for column in inspect(self).mapper.column_attrs
+            }
+
+        function as_AppResult(self):
+            return AppResult(AppResult.Source.Database, self.dict())
+
+        @classmethod
+        def export(...)
+            ...
+            results = [app.as_AppResult().dict() for app in job.apps]
+        or
+
+        @property
+        function result(self):
+            return AppResult(AppResult.Source.Database, self.dict())
+
+        @classmethod
+        def export(...)
+            ...
+            results = [app.result.dict() for app in job.apps]
+        """
         job = cls.query.get(jobnumber)
         results = []
 
@@ -90,6 +143,11 @@ class dbJob(db.Model):
 
         with open(f'{dirName}results.{filetype}', 'w') as exportFile:
             if filetype == 'CSV':
+                """TM
+                What does [*results[0]] do? I can of course look back and see it is the first
+                result, then unpack it as a list, which gets me the keys. That is not very
+                readable. Maybe add a appresult.keys()?
+                """
                 print([*results[0]])
                 writer = csv.DictWriter(exportFile, delimiter=';', quoting=csv.QUOTE_MINIMAL, fieldnames=[*results[0]])
                 writer.writeheader()
