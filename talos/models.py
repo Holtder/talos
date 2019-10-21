@@ -1,34 +1,13 @@
+import enum
+import os
+import csv
+import json
+
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+
 from .tasks import search_appstores_task
-import enum
-import os
-import csv
-import json
-from .appstore import appresult
-"""TM
-I usually order my imports
-
-standard library imports
-#one enter
-dependency imports
-#one enter
-internal imports
-#two enters
-
-This might be my OCD... Anyway, here it would be:
-
-from datetime import datetime
-import json
-import enum
-import csv
-import os
-
-from flask_sqlalchemy import SQLAlchemy
-
-from .tasks import search_appstore_task
-from .appstore import appresult
-"""
+from .appstore import appResult
 
 
 db = SQLAlchemy()
@@ -111,18 +90,18 @@ class dbJob(db.Model):
                 for column in inspect(self).mapper.column_attrs
             }
 
-        function as_AppResult(self):
-            return AppResult(AppResult.Source.Database, self.dict())
+        function as_appResult(self):
+            return appResult(appResult.Source.Database, self.dict())
 
         @classmethod
         def export(...)
             ...
-            results = [app.as_AppResult().dict() for app in job.apps]
+            results = [app.as_appResult().dict() for app in job.apps]
         or
 
         @property
         function result(self):
-            return AppResult(AppResult.Source.Database, self.dict())
+            return appResult(appResult.Source.Database, self.dict())
 
         @classmethod
         def export(...)
@@ -133,7 +112,7 @@ class dbJob(db.Model):
         results = []
 
         for app in job.apps:
-            result = appresult(appresult.Source.Database, **app.__dict__).dict()
+            result = appResult(appResult.Source.Database, **app.__dict__).dict()
             results.append(result)
 
         dirName = 'talos/static/output/'
@@ -146,7 +125,7 @@ class dbJob(db.Model):
                 """TM
                 What does [*results[0]] do? I can of course look back and see it is the first
                 result, then unpack it as a list, which gets me the keys. That is not very
-                readable. Maybe add a appresult.keys()?
+                readable. Maybe add a appResult.keys()?
                 """
                 print([*results[0]])
                 writer = csv.DictWriter(exportFile, delimiter=';', quoting=csv.QUOTE_MINIMAL, fieldnames=[*results[0]])
