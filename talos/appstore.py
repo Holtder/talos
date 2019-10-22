@@ -128,65 +128,62 @@ class appResult:
             'content_rating'
         ]
 
+    @staticmethod
+    def android_search(searchquery, country_code):
+        """ Android Search Query, using the play-scraper package """
+        results = []
+        total = 0
 
-def android_search(searchquery, country_code, pagerange=13):
-    """ Android Search Query, using the play-scraper package """
-    results = []
-    total = 0
+        # As the play-scraper search functions per page, iteration (with a max of 13) is required
+        for i in range(0, 13):
+            response = play_scraper.search(
+                searchquery, i, True, 'en', country_code)
+            # If the size of the page is 0, ergo when it is empty, break off the loop
+            if not len(response) == 0:
+                for memb in response:
+                    newapp = appResult(appResult.Source.Android, **memb)
+                    total += 1
+                    results.append(newapp)
 
-    # As the play-scraper search functions per page, iteration (with a max of 13) is required
-    for i in range(0, pagerange):
-        response = play_scraper.search(
-            searchquery, i, True, 'en', country_code)
-        # If the size of the page is 0, ergo when it is empty, break off the loop
-        if not len(response) == 0:
-            for memb in response:
-                # for keymemb in keysDict[0].keys():
-                #     if keymemb not in memb:
-                #         memb[keymemb] = ''
-                newapp = appResult(appResult.Source.Android, **memb)
-                total += 1
-                results.append(newapp)
+            else:
+                break
 
-        else:
-            break
+        print('Android total: %s' % total)
+        return results
 
-    print('Android total: %s' % total)
-    return results
+    @staticmethod
+    def apple_search(searchquery, country_code):
+        """ Apple Search Query, using the official iTunes API """
+        results = []
+        total = 0
 
+        # Two variables nessecary in the construction of the final request-URL
+        url_endpoint = 'http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch'
+        search_params = {'country': country_code, 'lang': 'en-US',
+                         'media': 'software', 'limit': 200, 'offset': 0, 'term': searchquery}
 
-def apple_search(searchquery, country_code):
-    """ Apple Search Query, using the official iTunes API """
-    results = []
-    total = 0
+        # The iTunes API functions with pages as well, the size of one 'page' is set using the limit
+        # paramater in search_params. The offset is to set the starting position of the query
+        # limit:200 and offset:0 => first 200 results, limit:200 and offset:200 => second set of results
+        # limit has a max of 200
+        while True:
+            response = requests.get(url_endpoint, params=search_params).json()
+            # if the resultcount is less than 200, this is the last page
+            total += response['resultCount']
+            for memb in response['results']:
+                results.append(appResult(appResult.Source.Apple, **memb))
+            if response['resultCount'] < 200:
+                break
+            search_params['offset'] += search_params['limit']
+        print('Apple total:%s' % total)
+        return results
 
-    # Two variables nessecary in the construction of the final request-URL
-    url_endpoint = 'http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch'
-    search_params = {'country': country_code, 'lang': 'en-US',
-                     'media': 'software', 'limit': 200, 'offset': 0, 'term': searchquery}
+    @classmethod
+    def search_appstores(self, arg_searchterm, arg_country):
+        """ Using consts may seem redundant, but this allows one output to be applied differently where necessary
+        This way there is room for the addition of other languages without adding too much work
+        """
 
-    # The iTunes API functions with pages as well, the size of one 'page' is set using the limit
-    # paramater in search_params. The offset is to set the starting position of the query
-    # limit:200 and offset:0 => first 200 results, limit:200 and offset:200 => second set of results
-    # limit has a max of 200
-    while True:
-        response = requests.get(url_endpoint, params=search_params).json()
-        # if the resultcount is less than 200, this is the last page
-        total += response['resultCount']
-        for memb in response['results']:
-            results.append(appResult(appResult.Source.Apple, **memb))
-        if response['resultCount'] < 200:
-            break
-        search_params['offset'] += search_params['limit']
-    print('Apple total:%s' % total)
-    return results
-
-
-def search_appstores(arg_searchterm, arg_country):
-    """ Using consts may seem redundant, but this allows one output to be applied differently where necessary
-    This way there is room for the addition of other languages without adding too much work
-    """
-
-    results = android_search(arg_searchterm, arg_country, 1)
-    results += apple_search(arg_searchterm, arg_country)
-    return results
+        results = self.android_search(arg_searchterm, arg_country)
+        results += self.apple_search(arg_searchterm, arg_country)
+        return results

@@ -1,7 +1,7 @@
 import logging
 
 from celery import Celery
-from .appstore import search_appstores
+from .appstore import appResult
 
 
 logger = logging.getLogger()
@@ -16,7 +16,7 @@ def search_appstores_task(term, country, jobid):
     with app.app_context():
         # Gets the job object from the ID that is passed
         job = dbJob.query.get(jobid)
-        results = search_appstores(term, country)
+        results = appResult.search_appstores(term, country)
 
         # Each app in results is stored in the DB
         for result in results:
