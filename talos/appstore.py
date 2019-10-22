@@ -24,29 +24,6 @@ class appResult:
         i represents the type of input (0: android search query, 1: apple search query, 2: database record)
         """
 
-        """TM
-        You can use this to set this to the dict argument passed and if not set fall back to source.
-        self.store = kwargsDict.get("store", source)
-
-
-        Feeling like your constructor is too crowded? Use properties!
-
-        def __init__(self, dev_id, dev_name):
-            self.dev_id = dev_id
-            self.dev_name = dev_name
-
-        @property
-        def dev_name(self):
-            return self._dev_name
-
-        @dev_name.setter
-        def set_dev_name(self, value):
-            if self.dev_id != "5700313618786177705" and value == 'Google Commerce Ltd'):
-                self._dev_name = "N/A"
-            else:
-                self._dev_name = value
-        """
-
         kwargDict = {}
         for key, value in kwargs.items():
             if key in keysDict[source.value]:
