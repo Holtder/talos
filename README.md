@@ -73,6 +73,8 @@ The following functions are to be implemented in the future:
 * Docker packaging, which should remove the need for the aforementioned installrequirements and instructions
 * Serving a webserver with Flask (using g-unicorn & nginx)
 
-# Aknowledgements
+# Acknowledgements
+Github User and good friend [thijsmie](https://github.com/thijsmie) spared me some precious time from his thesis and helped a lot by providing feedback on basically everything, from which I learned a lot.
+
 Github User [zenyui](https://https://github.com/zenyui) wrote a clear and concise [example](https://github.com/zenyui/celery-flask-factory) of how to properly implement both Flask and Celery in one app. 
 The Talos script [`appfactory.py`](https://github.com/Holtder/Talos/blob/master/talos/appfactory.py) is based on the example script [`core.py`](https://github.com/zenyui/celery-flask-factory/blob/master/server/core.py) 
