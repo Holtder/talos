@@ -5,6 +5,7 @@ import json
 
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import inspect
 
 from .tasks import search_appstores_task
 from .appstore import appResult
@@ -79,41 +80,12 @@ class dbJob(db.Model):
 
     @classmethod
     def export(cls, jobnumber, filetype):
-        """TM
-        Readability could be improved here with:
-
-        from sqlalchemy import inspect
-
-        function dict(self):
-            return {
-                column.key: getattr(self, column.key)
-                for column in inspect(self).mapper.column_attrs
-            }
-
-        function as_appResult(self):
-            return appResult(appResult.Source.Database, self.dict())
-
-        @classmethod
-        def export(...)
-            ...
-            results = [app.as_appResult().dict() for app in job.apps]
-        or
-
-        @property
-        function result(self):
-            return appResult(appResult.Source.Database, self.dict())
-
-        @classmethod
-        def export(...)
-            ...
-            results = [app.result.dict() for app in job.apps]
-        """
         job = cls.query.get(jobnumber)
-        results = []
+        results = [app.as_appResult().dict() for app in job.apps]
 
-        for app in job.apps:
-            result = appResult(appResult.Source.Database, **app.__dict__).dict()
-            results.append(result)
+        # for app in job.apps:
+        #     result = appResult(appResult.Source.Database, **app.__dict__).dict()
+        #     results.append(result)
 
         dirName = 'talos/static/output/'
         # Create target directory if doesn't exist yet
@@ -122,13 +94,10 @@ class dbJob(db.Model):
 
         with open(f'{dirName}results.{filetype}', 'w') as exportFile:
             if filetype == 'CSV':
-                """TM
-                What does [*results[0]] do? I can of course look back and see it is the first
-                result, then unpack it as a list, which gets me the keys. That is not very
-                readable. Maybe add a appResult.keys()?
-                """
+                print(appResult.keys())
                 print([*results[0]])
-                writer = csv.DictWriter(exportFile, delimiter=';', quoting=csv.QUOTE_MINIMAL, fieldnames=[*results[0]])
+                writer = csv.DictWriter(
+                    exportFile, delimiter=';', quoting=csv.QUOTE_MINIMAL, fieldnames=appResult.keys())
                 writer.writeheader()
                 for app in results:
                     writer.writerow(app)
@@ -152,3 +121,12 @@ class dbApp(db.Model):
     latest_patch = db.Column(db.String(), nullable=False)
     content_rating = db.Column(db.String(), nullable=False)
     job_id = db.Column(db.Integer, db.ForeignKey('db_job.id'), nullable=False)
+
+    def dict(self):
+        return {
+            column.key: getattr(self, column.key)
+            for column in inspect(self).mapper.column_attrs
+        }
+
+    def as_appResult(self):
+        return appResult(appResult.Source.Database, **self.dict())
