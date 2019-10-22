@@ -4,13 +4,18 @@ from celery import Celery
 from .appstore import appResult
 
 
+""" The logger and celery object are defined here, but the celery object is finalized in appfactory.py """
 logger = logging.getLogger()
 celery = Celery(__name__, autofinalize=False)
 
 
 @celery.task
 def search_appstores_task(term, country, jobid):
-    """ The one task in celery, collects apps based on search terms """
+    """ The one task in celery, collects apps based on search terms
+    Some imports are inside the function to make sure the db is populated
+    before this task is called.
+    """
+
     from flask import current_app as app
     from .models import db, dbJob, dbApp
     with app.app_context():
@@ -40,4 +45,3 @@ def search_appstores_task(term, country, jobid):
         job.state = job.state.Finished
         db.session.add(job)
         db.session.commit()
-    return  # No need to actually return anything

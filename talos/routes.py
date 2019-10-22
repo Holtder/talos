@@ -1,6 +1,8 @@
 from flask import render_template, url_for, flash, redirect, Blueprint
+
 from .forms import AppQuery, JobAction
 from .models import db, dbJob
+
 
 talosBP = Blueprint("Talos", __name__, static_folder='static',
                     static_url_path='/static')
