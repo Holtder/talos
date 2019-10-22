@@ -1,4 +1,4 @@
-import logging 
+import logging
 
 from celery import Celery
 from .appstore import search_appstores
@@ -6,24 +6,11 @@ from .appstore import search_appstores
 
 logger = logging.getLogger()
 celery = Celery(__name__, autofinalize=False)
-"""TM
 
 
-Also a good idea for the app context (you can do this in middleware):
-TaskBase = celery.Task
-class AppContextTask(TaskBase):
-    abstract = True
-    def __call__(self, *args, **kwargs):
-        with app.app_context():
-            return TaskBase.__call__(self, *args, **kwargs)
-celery.Task = AppContextTask
-
-See https://github.com/zenyui/celery-flask-factory for a super clean example
-"""
-
-# The one task in celery, unfortunately cannot be put into another module
 @celery.task
 def search_appstores_task(term, country, jobid):
+    """ The one task in celery, collects apps based on search terms """
     from flask import current_app as app
     from .models import db, dbJob, dbApp
     with app.app_context():
