@@ -69,9 +69,13 @@ You can now find Talos at [`127.0.0.1:5000`](http://127.0.0.1:5000) in your pref
 
 
 # Notes
-The following functions are to be implemented in the future:
+The following functions, features and files are to be implemented in the future:
 * Docker packaging, which should remove the need for the aforementioned installrequirements and instructions
 * Serving a webserver with Flask (using g-unicorn & nginx)
+  * Alongside this a privacy policy, as search queries are stored for functional reasons
+    * Due to privacy reasons, the publicly hosted version of Talos will delete all queries older than 24h
+* Autodeletion of jobs stuck in 'In progress' queue
+
 
 # Acknowledgements
 Github User and good friend [thijsmie](https://github.com/thijsmie) spared me some precious time from his thesis and helped a lot by providing feedback on basically everything, from which I learned a lot.
