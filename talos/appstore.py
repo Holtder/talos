@@ -2,7 +2,7 @@ import requests
 import play_scraper
 import enum
 from datetime import datetime
-from .consts import android_key_list, keysDict
+from .consts import keysDict, illegal_price
 
 
 class appResult:
@@ -75,43 +75,16 @@ class appResult:
         if (self.dev_id != "5700313618786177705") and (self.dev_name == 'Google Commerce Ltd'):
             self.dev_name = "N/A"
 
-        # Description formatting
-        self.description = kwargDict['description']
-        if self.description is None:
-            self.description = ''
+        self.description = kwargDict.get('description', '')
 
-        """TM
-        These escapes are not necessary, the csv and json module handle this for you
-        """
+        # Price formatting to cents
+        price = str(kwargDict.get("fullprice", "00")).strip()
+        if price == "" or price == "None" or price == "0":
+            price = "00"
+        for c in illegal_price:
+            price = price.replace(c, '')
+        self.fullprice = price.strip()
 
-        # for c, v in illegal_desc:
-        #    self.description = self.description.replace(c, v)
-
-        try:
-            price = int(kwargDict["fullprice"])
-            if price == 0:
-                self.fullprice = "00"
-            else:
-                self.fullprice = str(price)
-        except KeyError:  # No fullprice specified
-            self.fullprice = "00"
-        except ValueError:  # Faulty formatting
-            self.fullprice = "00"
-
-        # # Price formatting to cents
-        # self.fullprice = str(kwargDict.get("fullprice", "00")).strip()
-        # if self.fullprice is "None" or self.fullprice == "" or self.fullprice == "0":
-        #     self.fullprice = "00"
-        # # for c in illegal_price:
-        # #    self.fullprice = self.fullprice.replace(c, '')
-        # self.fullprice = self.fullprice.strip()
-
-        """TM
-        I a key does not exist in a dictionary you will get a keyerror. By using .get() you get None or
-        a default value if specified. Add your fallback date as default and overwrite,
-        this makes sure that you don't have to worry about which if-else chains you can get to
-        and which are unreachable.
-        """
         self.latest_patch = kwargDict.get('latest_patch', datetime.strptime("1808-08-08", "%Y-%m-%d"))
         if source != self.Source.Database:
             if self.latest_patch is not None:
@@ -137,27 +110,20 @@ class appResult:
             'content_rating': self.content_rating
         }
 
-
-"""TM
-Why would I put these in a static method? Because of the interface on the other side.
-It's more of a personal preference, but look at these two examples:
-
-from talos.appstore import appResult, android_search
-
-apps = android_search("query")
-
-or
-
-from talos.appstore import appResult
-
-apps = appResult.query_playstore("query")
-
-
-Because I use CamelCase it is clear this is a static method. By putting it in the class scope the
-return type is clear from just the function call. This is helpful because often the imports
-at the top of the file and the place they are used are not on one screen.
-I almost never import functions only classes.
-"""
+    def keys():
+        return [
+            'app_title',
+            'bundleid',
+            'store',
+            'description',
+            'dev_name',
+            'dev_id',
+            'fullprice',
+            'versionnumber',
+            'osreq',
+            'latest_patch',
+            'content_rating'
+        ]
 
 
 def android_search(searchquery, country_code, pagerange=13):
@@ -172,9 +138,9 @@ def android_search(searchquery, country_code, pagerange=13):
         # If the size of the page is 0, ergo when it is empty, break off the loop
         if not len(response) == 0:
             for memb in response:
-                for keymemb in android_key_list:
-                    if keymemb not in memb:
-                        memb[keymemb] = ''
+                # for keymemb in keysDict[0].keys():
+                #     if keymemb not in memb:
+                #         memb[keymemb] = ''
                 newapp = appResult(appResult.Source.Android, **memb)
                 total += 1
                 results.append(newapp)
