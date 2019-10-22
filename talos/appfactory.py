@@ -1,4 +1,3 @@
-import os
 import logging
 
 from flask import Flask
@@ -8,6 +7,11 @@ from .tasks import celery
 
 
 logger = logging.getLogger()
+
+"""This script makes use of code written by Zenyui https://github.com/zenyui/celery-flask-factory
+Code that allows for celery and flask to each have their own entrypoint without getting in eachothers way
+when importing other parts of the app.
+"""
 
 
 def create_app(debug=False):
@@ -19,6 +23,9 @@ def create_celery(debug=False):
 
 
 def entrypoint(debug=False, mode='app'):
+    """Both create functions lead back to this function, passing different arguments based on
+    which call is made"""
+
     assert isinstance(mode, str), 'bad mode type "{}"'.format(type(mode))
     assert mode in ('app', 'celery'), 'bad mode "{}"'.format(mode)
 
@@ -26,11 +33,12 @@ def entrypoint(debug=False, mode='app'):
 
     app.debug = debug
 
+    # Configure Flask, the logging file and celery
     configure_app(app)
     configure_logging(debug=debug)
     configure_celery(app, tasks.celery)
 
-    # register blueprints
+    # Register the blueprint for all the pages
     app.register_blueprint(routes.talosBP, url_prefix='')
 
     if mode == 'app':
@@ -44,6 +52,8 @@ def configure_app(app):
     logger.info('configuring flask app')
     # app.config['CELERY_BROKER_URL'] = os.environ.get('CELERY_BROKER_URL')
     # app.config['CELERY_RESULT_BACKEND'] = os.environ.get('CELERY_RESULT_BACKEND')
+
+    # in Talos.config two objects are defined, whose members represent a set of configs for Flask
     app.config.from_object(developmentConfig)
     from .models import db
     db.init_app(app)
@@ -89,9 +99,3 @@ def configure_logging(debug=False):
         root.setLevel(logging.DEBUG)
     else:
         root.setLevel(logging.INFO)
-
-# def make_app(config):
-#     flaskApp = Flask(__name__)
-#     flaskApp.config.from_object(config)
-#     celeryApp = activate_middleware(flaskApp)
-#     return flaskApp, celeryApp
