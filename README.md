@@ -3,12 +3,11 @@ These notes are still very much a WiP; it was developed on Ubuntu 18.04 in Pytho
 # Installation
 ## Install Script
 You can choose to install Talos manually on your device, or you can use the following script:\
-(note to self, when the installscript is done, add it here)
 ```bash
-wget scriptwildcard.sh
-chmod a+x scriptwildcard.sh
-./scriptwildcard.sh
+wget -O - https://raw.githubusercontent.com/Holtder/Talos/master/installtalos.sh | bash
 ```
+
+Please note: It is good practice not to trust install scripts like these out of the box, feel free to check out its [contents](https://github.com/Holtder/Talos/blob/master/installtalos.sh) before using the command above!
 
 ## Manual install
 ### Requirements
