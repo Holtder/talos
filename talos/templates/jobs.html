@@ -32,7 +32,7 @@
         <h1>Completed:</h1><hr>
         {% for job in jobs %}
             {% if job.state == job.state.Finished %}
-                <hr><h3>{{ job.id }}. {{ job.posted.strftime("%Y-%m-%d %H:%M:%S")}}: <i>{{ job.jobname }}</i></h3>
+                <hr><h3>{{ job.id }}. {{ job.posted.strftime("%Y-%m-%d %H:%M:%S")}} <i>{{ job.jobname }}</i></h3>
                 <p><b>Search terms ({{ job.countrycode }}):</b> "{{job.terms}}"</p>
                 <p><b>Results:</b> {{ job.results }}</p>
                 <br><br>

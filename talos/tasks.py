@@ -1,18 +1,27 @@
+import logging
+
 from celery import Celery
-from .appstore import search_appstores
-from .appfactory import DevelopmentConfig as Config
+from .appstore import appResult
 
-celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 
-# The one task in celery, unfortunately cannot be put into another module
+""" The logger and celery object are defined here, but the celery object is finalized in appfactory.py """
+logger = logging.getLogger()
+celery = Celery(__name__, autofinalize=False)
+
+
 @celery.task
 def search_appstores_task(term, country, jobid):
-    from . import app
+    """ The one task in celery, collects apps based on search terms
+    Some imports are inside the function to make sure the db is populated
+    before this task is called.
+    """
+
+    from flask import current_app as app
     from .models import db, dbJob, dbApp
     with app.app_context():
         # Gets the job object from the ID that is passed
         job = dbJob.query.get(jobid)
-        results = search_appstores(term, country)
+        results = appResult.search_appstores(term, country)
 
         # Each app in results is stored in the DB
         for result in results:
@@ -36,4 +45,3 @@ def search_appstores_task(term, country, jobid):
         job.state = job.state.Finished
         db.session.add(job)
         db.session.commit()
-    return  # No need to actually return anything

@@ -1,11 +1,15 @@
-from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
-from .tasks import search_appstores_task
 import enum
 import os
 import csv
 import json
-from .appstore import appresult
+
+from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import inspect
+
+from .tasks import search_appstores_task
+from .appstore import appResult
+
 
 db = SQLAlchemy()
 
@@ -77,11 +81,11 @@ class dbJob(db.Model):
     @classmethod
     def export(cls, jobnumber, filetype):
         job = cls.query.get(jobnumber)
-        results = []
+        results = [app.as_appResult().dict() for app in job.apps]
 
-        for app in job.apps:
-            result = appresult(appresult.Source.Database, **app.__dict__).dict()
-            results.append(result)
+        # for app in job.apps:
+        #     result = appResult(appResult.Source.Database, **app.__dict__).dict()
+        #     results.append(result)
 
         dirName = 'talos/static/output/'
         # Create target directory if doesn't exist yet
@@ -90,8 +94,8 @@ class dbJob(db.Model):
 
         with open(f'{dirName}results.{filetype}', 'w') as exportFile:
             if filetype == 'CSV':
-                print([*results[0]])
-                writer = csv.DictWriter(exportFile, delimiter=';', quoting=csv.QUOTE_MINIMAL, fieldnames=[*results[0]])
+                writer = csv.DictWriter(
+                    exportFile, delimiter=';', quoting=csv.QUOTE_MINIMAL, fieldnames=appResult.keys())
                 writer.writeheader()
                 for app in results:
                     writer.writerow(app)
@@ -115,3 +119,12 @@ class dbApp(db.Model):
     latest_patch = db.Column(db.String(), nullable=False)
     content_rating = db.Column(db.String(), nullable=False)
     job_id = db.Column(db.Integer, db.ForeignKey('db_job.id'), nullable=False)
+
+    def dict(self):
+        return {
+            column.key: getattr(self, column.key)
+            for column in inspect(self).mapper.column_attrs
+        }
+
+    def as_appResult(self):
+        return appResult(appResult.Source.Database, **self.dict())
