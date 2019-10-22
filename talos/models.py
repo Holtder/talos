@@ -94,8 +94,6 @@ class dbJob(db.Model):
 
         with open(f'{dirName}results.{filetype}', 'w') as exportFile:
             if filetype == 'CSV':
-                print(appResult.keys())
-                print([*results[0]])
                 writer = csv.DictWriter(
                     exportFile, delimiter=';', quoting=csv.QUOTE_MINIMAL, fieldnames=appResult.keys())
                 writer.writeheader()
