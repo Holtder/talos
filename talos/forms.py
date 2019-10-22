@@ -5,9 +5,12 @@ from .consts import COUNTRY_ABBREV
 
 
 class AppQuery(FlaskForm):
-    query = StringField('Search Terms:', validators=[DataRequired(), Length(min=3)])
-    shop_country = SelectField('Simulated country of request:', choices=COUNTRY_ABBREV)
-    job_name = StringField('Job Name:', validators=[DataRequired(), Length(min=3, max=30)])
+    query = StringField('Search Terms:', validators=[
+                        DataRequired(), Length(min=3)])
+    shop_country = SelectField(
+        'Simulated country of request:', choices=COUNTRY_ABBREV)
+    job_name = StringField('Job Name:', validators=[
+                           DataRequired(), Length(min=3, max=30)])
     submit = SubmitField('Submit')
 
 

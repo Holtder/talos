@@ -1,5 +1,6 @@
 # Key lists as they are represente in the play and apple API
-COUNTRY_ABBREV = [('us', 'United States'), ('gb', 'Great Britain'), ('nl', 'The Netherlands')]
+COUNTRY_ABBREV = [('us', 'United States'),
+                  ('gb', 'Great Britain'), ('nl', 'The Netherlands')]
 illegal_price = ['$', '£', '€', ' ', '.', ',']
 
 keysDict = [

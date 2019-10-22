@@ -85,15 +85,18 @@ class appResult:
             price = price.replace(c, '')
         self.fullprice = price.strip()
 
-        self.latest_patch = kwargDict.get('latest_patch', datetime.strptime("1808-08-08", "%Y-%m-%d"))
+        self.latest_patch = kwargDict.get(
+            'latest_patch', datetime.strptime("1808-08-08", "%Y-%m-%d"))
         if source != self.Source.Database:
             if self.latest_patch is not None:
                 if self.store == "android":
                     # Example: June 3, 2019 to 2019-06-03
-                    self.latest_patch = datetime.strptime(self.latest_patch, "%B %d, %Y")
+                    self.latest_patch = datetime.strptime(
+                        self.latest_patch, "%B %d, %Y")
                 elif self.store == "apple":
                     # Example: 2014-07-15T15:08:56Z to 2014-07-15
-                    self.latest_patch = datetime.strptime(self.latest_patch[0:10], "%Y-%m-%d")
+                    self.latest_patch = datetime.strptime(
+                        self.latest_patch[0:10], "%Y-%m-%d")
 
     def dict(self):
         return {

@@ -2,7 +2,8 @@ from flask import render_template, url_for, flash, redirect, Blueprint
 from .forms import AppQuery, JobAction
 from .models import db, dbJob
 
-talosBP = Blueprint("Talos", __name__, static_folder='static', static_url_path='/static')
+talosBP = Blueprint("Talos", __name__, static_folder='static',
+                    static_url_path='/static')
 
 
 @talosBP.route('/')
@@ -22,7 +23,8 @@ def submitquery():
 
     # Run this code if the form was valid and completed
     if form.validate_on_submit():
-        job = dbJob(jobname=form.job_name.data, countrycode=form.shop_country.data, terms=form.query.data, state="Waiting")
+        job = dbJob(jobname=form.job_name.data, countrycode=form.shop_country.data,
+                    terms=form.query.data, state="Waiting")
         db.session.add(job)
         db.session.commit()
 
@@ -42,7 +44,8 @@ def jobs():
         job = dbJob.query.get(jobactionform.jobnumber.data)
         if jobactionform.submitstart.data is True:
             dbJob.start(job.id)
-            flash(f'Job {job.id} successfully started! This WILL take a few minutes, grab some coffee!', 'success')
+            flash(
+                f'Job {job.id} successfully started! This WILL take a few minutes, grab some coffee!', 'success')
         elif jobactionform.submitcancel.data is True:
             dbJob.cancel(job.id)
             flash(f'Job {job.id} successfully canceled!', 'success')
