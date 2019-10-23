@@ -11,7 +11,7 @@ echo "This script will attempt to install the following packages:"
 echo " - Git"
 echo " - Python3-pip"
 echo " - Python3-venv"
-echo 
+echo
 while true; do
     read -p "Is this ok? (Y/N)" yn
     case $yn in
@@ -21,15 +21,15 @@ while true; do
     esac
 done
 
-echo 
-echo 
+echo
+echo
 echo "Warning!"
 echo
 echo "This script will create a Talos directory at the location of the installscript"
 echo "If a Talos installation is already present, it will be deleted!"
 echo "If this is not what you want, decline this prompt, move the script to your preferred location and run it again."
 echo "Current Installation Directory: $PWD/Talos"
-echo 
+echo
 while true; do
     read -p "Is this ok? (Y/N)" yn
     case $yn in
@@ -42,7 +42,7 @@ done
 rm -rf "Talos"
 git clone -q https://github.com/Holtder/Talos.git || exit 1
 
-cd "Talos"
+cd "Talos" || exit 1
 
 rm "installtalos.sh"
 rm -rf ".git"
