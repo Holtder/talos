@@ -15,7 +15,7 @@ echo
 while true; do
     read -p "Is this ok? (Y/N)" yn
     case $yn in
-        [Yy]* ) sudo apt-get install -qq python3-pip python3-venv git; break;;
+        [Yy]* ) sudo apt-get install -qq python3-pip python3-venv git || exit 1; break;;
         [Nn]* ) echo "Exiting Talos installer"; exit;;
         * ) echo "Please answer yes or no. (Y/N)";;
     esac
@@ -50,3 +50,4 @@ rm -rf ".git"
 python3 -m venv .env || exit 1
 source ".env/bin/activate" || exit 1
 pip install -r "requirements.txt" || exit 1
+chmod a+x talos.sh
