@@ -25,10 +25,10 @@ case "$0" in
 
     echo "Killing Talos webserver(if any) and restarting.."
 
-    python entrypoint_app.py & || exit 1
+    python entrypoint_app.py &
 
     echo "Successfully started Talos; you can now access it on 127.0.0.1:5000"
-    
+
 "stop")
     echo
 esac
