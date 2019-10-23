@@ -1,6 +1,6 @@
 #!/bin/bash
 
-envname="venv"
+envname=".env"
 # If the virtual environment folder does not exist, stop the process
 if [ ! -d "$envname" ]; then
     echo "Warning: Virtual Environment (.env) not properly set up, please check if you followed the installation instructions in README.MD!"
