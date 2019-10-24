@@ -15,7 +15,7 @@ def search_appstores_task(term, country, jobid):
     Some imports are inside the function to make sure the db is populated
     before this task is called.
     """
-
+    print(f"Starting task for Job {jobid}")
     from flask import current_app as app
     from .models import db, dbJob, dbApp
     with app.app_context():
@@ -38,10 +38,10 @@ def search_appstores_task(term, country, jobid):
                            content_rating=result.content_rating[0],
                            job_id=jobid)
             db.session.add(newApp)
-            db.session.commit()
 
         # For clarity on the webpage the total amount of results is stored
         job.results = len(results)
         job.state = job.state.Finished
         db.session.add(job)
         db.session.commit()
+    print(f"Completed task for Job {jobid}")
