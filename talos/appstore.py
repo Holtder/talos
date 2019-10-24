@@ -7,8 +7,9 @@ from .consts import keysDict, illegal_price
 
 class appResult:
     """
-    Each instance of this object represents one result from the app-store queries
-    Both APIs return a range of data but the variables used here are the ones that are returned by both
+    Each instance of this object represents one result from the app-store
+    queries. Both APIs return a range of data but the variables used here
+    are the ones that are returned by both.
     """
 
     class Source(enum.Enum):
@@ -18,10 +19,10 @@ class appResult:
 
     def __init__(self, source, **kwargs):
         """
-        Because the list of given arguments is variable, this code crossreferences the arguments
-        With a list of appstore-specific arguments. Based on that, a non-specific key is assigned to the value.
+        Because the list of given arguments is variable, this code
+        crossreferences the arguments with a list of appstore-specific
+        arguments. Based on that, a non-specific key is assigned to the value.
         That way the rest of the code can run universally.
-        i represents the type of input (0: android search query, 1: apple search query, 2: database record)
         """
 
         kwargDict = {}
@@ -44,9 +45,9 @@ class appResult:
         self.content_rating = kwargDict['content_rating']
 
         """
-        Dev name formatting: in some languages there is no dev name, only an ID
-        In that case, it gets defaulted to 'Google Commerce Ltd', which will be converted to n/a
-        But only if the dev ID is not google's
+        Dev name formatting: in some languages there is no dev name, only
+        an ID. In that case, it gets defaulted to 'Google Commerce Ltd',
+        which will be converted to n/a. But only if the dev ID is not google's
         """
         self.dev_name = kwargDict['dev_name']
         if (self.dev_id != "5700313618786177705") and (self.dev_name == 'Google Commerce Ltd'):
@@ -111,11 +112,13 @@ class appResult:
         results = []
         total = 0
 
-        # As the play-scraper search functions per page, iteration (with a max of 13) is required
+        # As the play-scraper search functions per page, iteration (with a max
+        # of 13) is required
         for i in range(0, 13):
             response = play_scraper.search(
                 searchquery, i, True, 'en', country_code)
-            # If the size of the page is 0, ergo when it is empty, break off the loop
+            # If the size of the page is 0, ergo when it is empty, break off
+            # the loop
             if not len(response) == 0:
                 for memb in response:
                     newapp = appResult(appResult.Source.Android, **memb)
@@ -136,13 +139,22 @@ class appResult:
 
         # Two variables nessecary in the construction of the final request-URL
         url_endpoint = 'http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/wa/wsSearch'
-        search_params = {'country': country_code, 'lang': 'en-US',
-                         'media': 'software', 'limit': 200, 'offset': 0, 'term': searchquery}
+        search_params = {
+            'country': country_code,
+            'lang': 'en-US',
+            'media': 'software',
+            'limit': 200,
+            'offset': 0,
+            'term': searchquery
+            }
 
-        # The iTunes API functions with pages as well, the size of one 'page' is set using the limit
-        # paramater in search_params. The offset is to set the starting position of the query
-        # limit:200 and offset:0 => first 200 results, limit:200 and offset:200 => second set of results
-        # limit has a max of 200
+        """
+        The iTunes API functions with pages as well, the size of one 'page'
+        is set using the limit paramater in search_params. The offset is to
+        set the starting position of the query limit:200 and offset:0 => first
+        200 results, limit:200 and offset:200 => second set of results.
+        Limit has a max of 200
+        """
         while True:
             response = requests.get(url_endpoint, params=search_params).json()
             # if the resultcount is less than 200, this is the last page
@@ -157,8 +169,9 @@ class appResult:
 
     @classmethod
     def search_appstores(self, arg_searchterm, arg_country):
-        """ Using consts may seem redundant, but this allows one output to be applied differently where necessary
-        This way there is room for the addition of other languages without adding too much work
+        """ Using consts may seem redundant, but this allows one output to
+        be applied differently where necessary. This way there is room for
+        the addition of other languages without adding too much work
         """
 
         results = self.android_search(arg_searchterm, arg_country)
