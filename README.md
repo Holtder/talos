@@ -1,6 +1,6 @@
 # Talos
 
-(These notes are still very much a WiP; Talos was developed on Ubuntu 18.04 in Python 3.6)
+(These notes are still very much a WiP; Talos is being developed on WSL-Ubuntu 18.04 in Python 3.6)
 
 ## Installation
 
