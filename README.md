@@ -96,7 +96,7 @@ python entrypoiny_app.py
 
 You can now find Talos at [`127.0.0.1:5000`](http://127.0.0.1:5000) in your preferred browser.
 
-## Notes
+## Planned features
 
 The following functions, features and files are to be implemented in the future:
 
@@ -105,6 +105,7 @@ The following functions, features and files are to be implemented in the future:
   * Alongside this a privacy policy, as search queries are stored for functional reasons
     * Due to privacy reasons, the publicly hosted version of Talos will delete all queries older than 24h
 * Autodeletion of jobs stuck in 'In progress' queue
+* Workflow optimisation: If multiple jobs are started the database will overload, either fix this or prevent the user from doing this.
 
 ## Acknowledgements
 

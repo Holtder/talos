@@ -50,4 +50,3 @@ rm -rf ".git"
 python3 -m venv .env || exit 1
 source ".env/bin/activate" || exit 1
 pip install -r "requirements.txt" || exit 1
-chmod a+x talos.sh
