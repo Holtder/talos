@@ -2,6 +2,7 @@ import enum
 import os
 import csv
 import json
+import time
 
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
@@ -80,7 +81,15 @@ class dbJob(db.Model):
 
     @classmethod
     def export(cls, jobnumber, filetype):
-        job = cls.query.get(jobnumber)
+        job = None
+
+        # If the database is locked due to celery writing to the database, retry after two seconds
+        while job is None:
+            try:
+                job = cls.query.get(jobnumber)
+            except:
+                time.sleep(2)
+
         results = [app.as_appResult().dict() for app in job.apps]
 
         # for app in job.apps:
