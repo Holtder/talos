@@ -85,7 +85,7 @@ Then open two terminals in the virtual environment (`$ source .env/bin/activate`
 Terminal 1:
 
 ```bash
-celery -A entrypoint_celery.celery worker
+celery -A entrypoint_celery.celery worker --concurrency=1
 ```
 
 Terminal 2:
