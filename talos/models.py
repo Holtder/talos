@@ -125,7 +125,7 @@ class dbApp(db.Model):
     dev_id = db.Column(db.String(), nullable=False)
     fullprice = db.Column(db.Integer, nullable=False)
     versionnumber = db.Column(db.String(), nullable=False)
-    osreq = db.Column(db.String(), nullable=False)
+    osreq = db.Column(db.String(), nullable=False, default="No OS Requirement Specified")
     latest_patch = db.Column(db.String(), nullable=False)
     content_rating = db.Column(db.String(), nullable=False)
     job_id = db.Column(db.Integer, db.ForeignKey('db_job.id'), nullable=False)
