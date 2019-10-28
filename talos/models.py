@@ -1,3 +1,5 @@
+#coding:utf8
+
 import enum
 import os
 import csv
@@ -101,7 +103,7 @@ class dbJob(db.Model):
         if not os.path.exists(dirName):
             os.makedirs(dirName)
 
-        with open(f'{dirName}results.{filetype}', 'w') as exportFile:
+        with open(f'{dirName}results.{filetype}', 'w', encoding='utf-8-sig') as exportFile:
             if filetype == 'CSV':
                 writer = csv.DictWriter(
                     exportFile, delimiter=';', quoting=csv.QUOTE_MINIMAL, fieldnames=appResult.keys())
