@@ -115,18 +115,21 @@ class appResult:
         # As the play-scraper search functions per page, iteration (with a max
         # of 13) is required
         for i in range(0, 13):
-            response = play_scraper.search(
-                searchquery, i, True, 'en', country_code)
-            # If the size of the page is 0, ergo when it is empty, break off
-            # the loop
-            if not len(response) == 0:
-                for memb in response:
-                    newapp = appResult(appResult.Source.Android, **memb)
-                    total += 1
-                    results.append(newapp)
+            try:
+                response = play_scraper.search(
+                    searchquery, i, True, 'en', country_code)
+                # If the size of the page is 0, ergo when it is empty, break off
+                # the loop
+                if not len(response) == 0:
+                    for memb in response:
+                        newapp = appResult(appResult.Source.Android, **memb)
+                        total += 1
+                        results.append(newapp)
 
-            else:
-                break
+                else:
+                    break
+            except:
+                print(f'Faulty app on page {i+1}, skipping..')
 
         print('Android total: %s' % total)
         return results
@@ -146,7 +149,7 @@ class appResult:
             'limit': 200,
             'offset': 0,
             'term': searchquery
-            }
+        }
 
         """
         The iTunes API functions with pages as well, the size of one 'page'
