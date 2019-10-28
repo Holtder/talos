@@ -26,8 +26,7 @@ class dbJob(db.Model):
     """ Database model representing a Job """
     id = db.Column(db.Integer, primary_key=True)
 
-    jobname = db.Column(db.String(30), nullable=True,
-                        default='No jobname supplied')
+    jobname = db.Column(db.String(30), nullable=False)
     countrycode = db.Column(db.String(2), nullable=False)
     posted = db.Column(db.DateTime, nullable=False, default=datetime.now)
     terms = db.Column(db.String(), nullable=False)
@@ -103,7 +102,7 @@ class dbJob(db.Model):
         if not os.path.exists(dirName):
             os.makedirs(dirName)
 
-        with open(f'{dirName}results.{filetype}', 'w', encoding='utf-8-sig') as exportFile:
+        with open(f'{dirName}{job.jobname}.{filetype}', 'w', encoding='utf-8-sig') as exportFile:
             if filetype == 'CSV':
                 writer = csv.DictWriter(
                     exportFile, delimiter=';', quoting=csv.QUOTE_MINIMAL, fieldnames=appResult.keys())
