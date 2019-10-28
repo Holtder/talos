@@ -44,8 +44,8 @@
                     <div class="form-group">
                         <p><b>Download:</b></p>
                         <p>    
-                            <a class="btn btn-outline-info" href="{{ url_for('Talos.results', jobid=job.id, type='CSV') }}" download>CSV</a>
-                            <a class="btn btn-outline-info" href="{{ url_for('Talos.results', jobid=job.id, type='JSON') }}" download>JSON</a>
+                            <a class="btn btn-outline-info" href="{{ url_for('Talos.results', jobid=job.id, type='CSV') }}" download="{{ job.jobname }}.CSV">CSV</a>
+                            <a class="btn btn-outline-info" href="{{ url_for('Talos.results', jobid=job.id, type='JSON') }}" download="{{ job.jobname }}.CSV.JSON">JSON</a>
                         </p>
                         {{ jobactionform.submitdelete(class="btn btn-outline-info") }}
                     </div>
