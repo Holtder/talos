@@ -32,7 +32,7 @@ def submitquery():
 
         # Set flash message to notify user of succesfull query submission.
         flash(f'Job {form.job_name.data} successfully submitted!', 'success')
-        return redirect(url_for('Talos.jobs'))
+        return redirect(url_for('Talos.submitquery'))
     return render_template('submitquery.html', title='Submit a new Query',
                            form=form)
 

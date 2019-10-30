@@ -15,7 +15,7 @@ def search_appstores_task(term, country, jobid):
     Some imports are inside the function to make sure the db is populated
     before this task is called.
     """
-    print(f"Starting task for Job {jobid}")
+    print(f"Starting task for Job {jobid}. ({country}) {term}")
     from flask import current_app as app
     from .models import db, dbJob, dbApp
     with app.app_context():
