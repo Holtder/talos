@@ -92,7 +92,7 @@ celery -A entrypoint_celery.celery worker --concurrency=1
 Terminal 2:
 
 ```bash
-python entrypoiny_app.py
+FLASK_APP=entrypoint_app.py flask run
 ```
 
 You can now find Talos at [`127.0.0.1:5000`](http://127.0.0.1:5000) in your preferred browser.
