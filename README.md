@@ -57,7 +57,7 @@ The following packages are used in Talos:
 * Redis
 
 Install them with the following command (if you chose to not use  a virtual environment, use `pip3` instead of `pip`):\
-`$ pip install -r requirements`
+`$ pip install -r requirements.txt`
 
 #### Finishing touches
 
