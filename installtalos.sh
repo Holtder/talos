@@ -62,12 +62,13 @@ python3 -m venv .env || exit 1
 source ".env/bin/activate" || exit 1
 pip install -r "requirements.txt" || exit 1
 
-echo "Starting Redis"
-redis-server || exit 1
+echo "Stopping old Talos services if present"
+sudo systemctl stop talos
+sudo systemctl disable talos
 
 echo "Creating service"
 sudo rm -f /etc/systemd/system/talos.service || exit 1
-sudo cat <<EOT >> /etc/systemd/system/talos.service
+sudo bash -c 'cat > /etc/systemd/system/talos.service' << EOT
 #Metadata and dependencies section
 [Unit]
 Description=Talos service
@@ -78,12 +79,13 @@ User=$USER
 Group=www-data
 WorkingDent==$cwd
 Environment="PATH=$cwd/.env/bin"
-ExecStart=$cwd/.env/bin/uwsgi --ini talos.ini
+ExecStart=$cwd/.env/bin/uwsgi --ini $cwd/talos.ini
 #Link the service to start on multi-user system up
 [Install]
 WantedBy=multi-user.target
 EOT
 
+sudo systemctl daemon-reload
 
 echo "Generating supervisord config"
 rm -f supervisord.conf || exit 1
@@ -99,7 +101,6 @@ startsecs=10
 stopwaitsecs=600
 EOT
 
-
 sudo systemctl start talos
 sudo systemctl enable talos
 supervisord
@@ -113,7 +114,7 @@ read -e -i "0.0.0.0" hostedaddress
 sudo rm -f /etc/nginx/sites-available/talos
 sudo rm -f /etc/nginx/sites-enabled/talos
 
-sudo cat <<EOT >> /etc/nginx/sites-available/talos
+sudo bash -c 'cat > /etc/nginx/sites-available/talos' << EOT
 server {
     # the port your site will be served on
     listen 80;
@@ -130,6 +131,6 @@ EOT
 sudo ln -s /etc/nginx/sites-available/talos /etc/nginx/sites-enabled
 
 echo "Reloading nginx config and restarting nginx"
-sudo ngnix -t
+sudo nginx -t
 sudo systemctl restart nginx
 

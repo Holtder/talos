@@ -83,3 +83,21 @@ Traceback (most recent call last):
   File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 242, in readline
   File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 187, in _read_from_socket
 redis.exceptions.ConnectionError: Connection closed by server.
+
+worker: Warm shutdown (MainProcess)
+ 
+ -------------- celery@talostesting v4.3.0 (rhubarb)
+---- **** ----- 
+--- * ***  * -- Linux-4.15.0-54-generic-x86_64-with-Ubuntu-18.04-bionic 2020-03-05 14:22:08
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         talos.tasks:0x7fc815195940
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/0
+- *** --- * --- .> concurrency: 1 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
