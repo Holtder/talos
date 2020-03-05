@@ -126,3 +126,5 @@ venv/
 dump.rdb
 feedback.txt
 talos/static/output/*
+
+cleryd.log
