@@ -1,1 +1,85 @@
 [2020-03-05 14:22:27,152: WARNING/ForkPoolWorker-1] Starting task for Job 2. (nl) Participatient
+[2020-03-05 14:27:47,686: WARNING/ForkPoolWorker-1] Android total: 650
+[2020-03-05 14:27:47,730: WARNING/ForkPoolWorker-1] Apple total:1
+[2020-03-05 14:27:48,083: WARNING/ForkPoolWorker-1] Completed task for Job 2
+[2020-03-05 15:10:53,792: WARNING/MainProcess] consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/worker/consumer/consumer.py", line 318, in start
+    blueprint.start(self)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/bootsteps.py", line 119, in start
+    step.start(parent)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/worker/consumer/consumer.py", line 596, in start
+    c.loop(*c.loop_args())
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/worker/loops.py", line 91, in asynloop
+    next(loop)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/asynchronous/hub.py", line 364, in create_loop
+    cb(*cbargs)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 1088, in on_readable
+    self.cycle.on_readable(fileno)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 359, in on_readable
+    chan.handlers[type]()
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 693, in _receive
+    ret.append(self._receive_one(c))
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 703, in _receive_one
+    response = c.parse_response()
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/client.py", line 3185, in parse_response
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/client.py", line 3159, in _execute
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 700, in read_response
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 310, in read_response
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 242, in readline
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 187, in _read_from_socket
+redis.exceptions.ConnectionError: Connection closed by server.
+[2020-03-05 15:12:08,517: WARNING/MainProcess] consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/worker/consumer/consumer.py", line 318, in start
+    blueprint.start(self)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/bootsteps.py", line 119, in start
+    step.start(parent)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/worker/consumer/consumer.py", line 596, in start
+    c.loop(*c.loop_args())
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/worker/loops.py", line 91, in asynloop
+    next(loop)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/asynchronous/hub.py", line 364, in create_loop
+    cb(*cbargs)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 1088, in on_readable
+    self.cycle.on_readable(fileno)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 359, in on_readable
+    chan.handlers[type]()
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 693, in _receive
+    ret.append(self._receive_one(c))
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 703, in _receive_one
+    response = c.parse_response()
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/client.py", line 3185, in parse_response
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/client.py", line 3159, in _execute
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 700, in read_response
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 310, in read_response
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 242, in readline
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 187, in _read_from_socket
+redis.exceptions.ConnectionError: Connection closed by server.
+[2020-03-05 15:14:20,511: WARNING/MainProcess] consumer: Connection to broker lost. Trying to re-establish the connection...
+Traceback (most recent call last):
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/worker/consumer/consumer.py", line 318, in start
+    blueprint.start(self)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/bootsteps.py", line 119, in start
+    step.start(parent)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/worker/consumer/consumer.py", line 596, in start
+    c.loop(*c.loop_args())
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/celery/worker/loops.py", line 91, in asynloop
+    next(loop)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/asynchronous/hub.py", line 364, in create_loop
+    cb(*cbargs)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 1088, in on_readable
+    self.cycle.on_readable(fileno)
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 359, in on_readable
+    chan.handlers[type]()
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 693, in _receive
+    ret.append(self._receive_one(c))
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/kombu/transport/redis.py", line 703, in _receive_one
+    response = c.parse_response()
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/client.py", line 3185, in parse_response
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/client.py", line 3159, in _execute
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 700, in read_response
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 310, in read_response
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 242, in readline
+  File "/home/holtder/Talos/.env/lib/python3.6/site-packages/redis/connection.py", line 187, in _read_from_socket
+redis.exceptions.ConnectionError: Connection closed by server.
