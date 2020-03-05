@@ -31,7 +31,7 @@ done
 
 echo "Enabling redis service"
 systemctl enable redis-server.service
-
+systemctl start redis-server.service
 
 echo
 echo
@@ -68,10 +68,10 @@ source ".env/bin/activate" || exit 1
 pip install -r "requirements.txt" || exit 1
 
 echo "Starting Redis"
-redis-server
+redis-server || exit 1
 
 echo "Creating service"
-rm -f /etc/systemd/system/talos.service
+rm -f /etc/systemd/system/talos.service || exit 1
 cat <<EOT >> /etc/systemd/system/talos.service
 #Metadata and dependencies section
 [Unit]
@@ -91,7 +91,7 @@ EOT
 
 
 echo "Generating supervisord config"
-rm -f supervisord.conf
+rm -f supervisord.conf || exit 1
 echo_supervisord_conf > $cwd/supervisord.conf
 cat <<EOT >> $cwd/supervisord.conf
 [program:celeryd]
@@ -102,8 +102,6 @@ autostart=true
 autorestart=true
 startsecs=10
 stopwaitsecs=600
-
-
 EOT
 
 
