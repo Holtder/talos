@@ -1,9 +1,9 @@
 #!/bin/bash
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 
-   exit 1
+if [ $EUID != 0 ]; then
+    echo "This script must run with root privileges"
+    sudo "$0" "$@"
+    exit $?
 fi
-
 pyv="$(python3 -V 2>&1)"
 pyv="${pyv:7:5}"
 if [ "$pyv" != "3.6.8" ]; then
