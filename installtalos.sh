@@ -1,8 +1,8 @@
 #!/bin/bash
 pyv="$(python3 -V 2>&1)"
-pyv="${pyv:7:5}"
-if [ "$pyv" != "3.6.8" ]; then
-    echo "Error: Requires Python 3.6.8"
+pyv="${pyv:7:3}"
+if [ "$pyv" != "3.6" ]; then
+    echo "Error: Requires Python 3.6.*"
     exit 1
 fi
 
