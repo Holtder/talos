@@ -1,9 +1,4 @@
 #!/bin/bash
-if [ $EUID != 0 ]; then
-    echo "This script must run with root privileges"
-    sudo "$0" "$@"
-    exit $?
-fi
 pyv="$(python3 -V 2>&1)"
 pyv="${pyv:7:5}"
 if [ "$pyv" != "3.6.8" ]; then
@@ -30,8 +25,8 @@ while true; do
 done
 
 echo "Enabling redis service"
-systemctl enable redis-server.service
-systemctl start redis-server.service
+sudo systemctl enable redis-server.service
+sudo systemctl start redis-server.service
 
 echo
 echo
@@ -71,8 +66,8 @@ echo "Starting Redis"
 redis-server || exit 1
 
 echo "Creating service"
-rm -f /etc/systemd/system/talos.service || exit 1
-cat <<EOT >> /etc/systemd/system/talos.service
+sudo rm -f /etc/systemd/system/talos.service || exit 1
+sudo cat <<EOT >> /etc/systemd/system/talos.service
 #Metadata and dependencies section
 [Unit]
 Description=Talos service
@@ -105,8 +100,8 @@ stopwaitsecs=600
 EOT
 
 
-systemctl start talos
-systemctl enable talos
+sudo systemctl start talos
+sudo systemctl enable talos
 supervisord
 
 echo "Configuring nginx"
@@ -115,11 +110,10 @@ echo "What is the address (domain or ip) you intend to serve Talos from [default
 
 read -e -i "0.0.0.0" hostedaddress
 
-rm -f /etc/nginx/sites-available/talos
-rm -f /etc/nginx/sites-enabled/talos
+sudo rm -f /etc/nginx/sites-available/talos
+sudo rm -f /etc/nginx/sites-enabled/talos
 
-cat <<EOT >> /etc/nginx/sites-available/talos
-
+sudo cat <<EOT >> /etc/nginx/sites-available/talos
 server {
     # the port your site will be served on
     listen 80;
@@ -133,9 +127,9 @@ server {
 }
 EOT
 
-ln -s /etc/nginx/sites-available/talos /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/talos /etc/nginx/sites-enabled
 
 echo "Reloading nginx config and restarting nginx"
-ngnix -t
-systemctl restart nginx
+sudo ngnix -t
+sudo systemctl restart nginx
 
