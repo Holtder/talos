@@ -92,7 +92,8 @@ EOT
 sudo systemctl daemon-reload
 
 echo "Generating supervisord config"
-rm -f supervisord.conf || exit 1
+sudo unlink /tmp/supervisor.sock
+rm -f supervisord.conf
 echo_supervisord_conf > $cwd/supervisord.conf
 cat <<EOT >> $cwd/supervisord.conf
 [program:celeryd]
@@ -105,16 +106,15 @@ startsecs=10
 stopwaitsecs=600
 EOT
 
+echo "Starting Talos and supervisord daemons"
 sudo systemctl start talos
 sudo systemctl enable talos
 supervisord
+supervisorctl restart celeryd
 
 echo "Configuring nginx"
-
 echo "What is the address (domain or ip) you intend to serve Talos from [default=0.0.0.0]:"
-
 read -e -i "0.0.0.0" hostedaddress
-
 sudo rm -f /etc/nginx/sites-available/talos
 sudo rm -f /etc/nginx/sites-enabled/talos
 
