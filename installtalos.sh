@@ -53,6 +53,8 @@ cd "Talos" || exit 1
 
 rm "installtalos.sh"
 rm -rf ".git"
+rm -f ".gitignore"
+rm -f "README.md"
 
 cwd=$(pwd)
 
@@ -61,6 +63,7 @@ echo "Creating virtual environment and installing Required Packages"
 python3 -m venv .env || exit 1
 source ".env/bin/activate" || exit 1
 pip install -r "requirements.txt" || exit 1
+rm -f "requirements.txt"
 
 echo "Stopping and deleting old Talos services if present"
 sudo systemctl stop talos
