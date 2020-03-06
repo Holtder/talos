@@ -11,7 +11,7 @@ echo "This script will attempt to install the following packages:"
 echo " - Git"
 echo " - Python3-pip"
 echo " - Python3-venv"
-echo " - Python3-wheel
+echo " - Python3-wheel"
 echo
 echo "It will also install redis and nginx on your server. Make sure you have uninstalled any webservers beforehand!"
 echo
