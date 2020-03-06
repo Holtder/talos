@@ -1,7 +1,7 @@
 import logging
 
 from flask import Flask
-from .config import productionConfig
+from .config import developmentConfig
 from . import routes, tasks
 from .tasks import celery
 
@@ -54,7 +54,7 @@ def configure_app(app):
     # app.config['CELERY_RESULT_BACKEND'] = os.environ.get('CELERY_RESULT_BACKEND')
 
     # in Talos.config two objects are defined, whose members represent a set of configs for Flask
-    app.config.from_object(productionConfig)
+    app.config.from_object(developmentConfig)
     from .models import db
     db.init_app(app)
     with app.app_context():
