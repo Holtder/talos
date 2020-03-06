@@ -81,7 +81,7 @@ After=network.target
 [Service]
 User=$USER
 Group=www-data
-WorkingDent==$cwd
+WorkingDirectory==$cwd
 Environment="PATH=$cwd/.env/bin"
 ExecStart=$cwd/.env/bin/uwsgi --ini $cwd/talos.ini
 #Link the service to start on multi-user system up
