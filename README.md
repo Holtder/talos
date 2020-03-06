@@ -28,10 +28,6 @@ You can find talos at the address you chose during install in your preferred bro
 
 The following functions, features and files are to be implemented in the future:
 
-* Docker packaging, which should remove the need for the aforementioned installrequirements and instructions
-* Serving a webserver with Flask (using g-unicorn & nginx)
-  * Alongside this a privacy policy, as search queries are stored for functional reasons
-    * Due to privacy reasons, the publicly hosted version of Talos will delete all queries older than 24h
 * Autodeletion of jobs stuck in 'In progress' queue
 * Workflow optimisation: If multiple jobs are started the database will overload, at the moment all jobs are queued after eachother. In the future I want to switch from a SQLite database to something more powerful, allowing concurrent task running. For now this'll do
 
