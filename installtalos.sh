@@ -62,12 +62,16 @@ python3 -m venv .env || exit 1
 source ".env/bin/activate" || exit 1
 pip install -r "requirements.txt" || exit 1
 
-echo "Stopping old Talos services if present"
+echo "Stopping and deleting old Talos services if present"
 sudo systemctl stop talos
 sudo systemctl disable talos
+sudo rm -f /etc/systemd/system/talos.service
+sudo rm -f /etc/systemd/system/talos.service
+sudo systemctl daemon-reload
+sudo systemctl reset-failed
 
 echo "Creating service"
-sudo rm -f /etc/systemd/system/talos.service || exit 1
+
 sudo bash -c 'cat > /etc/systemd/system/talos.service' << EOT
 #Metadata and dependencies section
 [Unit]
@@ -123,7 +127,7 @@ server {
     # Proxy connections to application server
     location / {
         include uwsgi_params;
-        uwsgi_pass unix:$cwd/talos.sock;
+        uwsgi_pass unix:/tmp/talos.sock;
     }
 }
 EOT
