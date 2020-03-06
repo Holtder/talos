@@ -5,10 +5,7 @@
 
 ## Installation
 
-Make sure you have the following installed:
-
-* A Linux distribution which supports the following:
-  * Python 3.6, including pip3 and virtualenv
+This application was developed on Ubuntu 18.04 (wsl) and is only supported on this platform for now. Get a Ubuntu 18.04 server and make sure you have no webservers (apache2, nginx and so on) installed/running on your server. 
 
 Suggestion: *If you are running Windows 10, use WSL, open the microsoft store and install Ubuntu 18.04. Then open wsl as your terminal. The following steps should work just as well.*
 
