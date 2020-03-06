@@ -11,14 +11,14 @@ echo "This script will attempt to install the following packages:"
 echo " - Git"
 echo " - Python3-pip"
 echo " - Python3-venv"
-echo
+echo " - Python3-wheel
 echo
 echo "It will also install redis and nginx on your server. Make sure you have uninstalled any webservers beforehand!"
 echo
 while true; do
     read -p "Is this ok? (Y/N)" yn
     case $yn in
-        [Yy]* ) sudo apt-get install -qq python3-pip python3-venv redis-server git nginx || exit 1; break;;
+        [Yy]* ) sudo apt-get install -qq python3-pip python3-venv python3-wheel redis-server git nginx || exit 1; break;;
         [Nn]* ) echo "Exiting Talos installer"; exit;;
         * ) echo "Please answer yes or no. (Y/N)";;
     esac
