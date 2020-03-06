@@ -1,11 +1,11 @@
 # Talos
 
 
-(These notes are still very much a WiP; Talos is being developed on WSL-Ubuntu 18.04 in Python 3.6)
+(These notes are still very much a WiP; Talos is being developed on Ubuntu 18.04 in Python 3.6)
 
 ## Installation
 
-This application was developed on Ubuntu 18.04 (wsl) and is only supported on this platform for now. Get a Ubuntu 18.04 server and make sure you have no webservers (apache2, nginx and so on) installed/running on your server. 
+This application was developed on Ubuntu 18.04 and is only supported on this platform for now. Get a Ubuntu 18.04 server and make sure you have no webservers (apache2, nginx and so on) installed/running on your server. 
 
 Suggestion: *If you are running Windows 10, use WSL, open the microsoft store and install Ubuntu 18.04. Then open wsl as your terminal. The following steps should work just as well.*
 
