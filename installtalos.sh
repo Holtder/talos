@@ -24,6 +24,8 @@ while true; do
     esac
 done
 
+mkdir log
+
 echo "Enabling redis service"
 sudo systemctl enable redis-server.service
 sudo systemctl start redis-server.service
@@ -80,8 +82,8 @@ echo_supervisord_conf > $cwd/supervisord.conf
 cat <<EOT >> $cwd/supervisord.conf
 [program:celeryd]
 command=$cwd/.env/bin/celery -A entrypoint_celery.celery worker --concurrency=1
-stdout_logfile=$cwd/celeryd.log
-stderr_logfile=$cwd/celeryd.log
+stdout_logfile=$cwd/log/celeryd.log
+stderr_logfile=$cwd/log/celeryd.log
 autostart=true
 autorestart=true
 startsecs=10
@@ -92,7 +94,7 @@ autostart = true
 command=$cwd/.env/bin/uwsgi --ini $cwd/talos.ini
 priority=1
 redirect_stderr=true
-stdout_logfile = $cwd/uwsgid.log
+stdout_logfile = $cwd/log/uwsgi.log
 stopsignal=QUIT
 EOT
 
