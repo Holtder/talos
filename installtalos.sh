@@ -89,7 +89,6 @@ stopwaitsecs=600
 
 [program:uwsgid]
 autostart = true
-user=root
 command=$cwd/.env/bin/uwsgi --ini $cwd/talos.ini
 priority=1
 redirect_stderr=true
