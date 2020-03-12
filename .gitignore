@@ -79,5 +79,6 @@ dump.rdb
 feedback.txt
 talos/static/output/*
 
-celeryd.log
+log/celeryd.log
+log/uwsgi.log
 supervisord.conf
