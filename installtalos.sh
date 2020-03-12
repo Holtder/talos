@@ -73,27 +73,6 @@ sudo rm -f /etc/systemd/system/talos.service
 sudo systemctl daemon-reload
 sudo systemctl reset-failed
 
-echo "Creating service"
-
-sudo bash -c 'cat > /etc/systemd/system/talos.service' << EOT
-#Metadata and dependencies section
-[Unit]
-Description=Talos service
-After=network.target
-#Define users and app working directory
-[Service]
-User=$USER
-Group=www-data
-WorkingDirectory=$cwd
-Environment="PATH=$cwd/.env/bin"
-ExecStart=$cwd/.env/bin/uwsgi --ini $cwd/talos.ini
-#Link the service to start on multi-user system up
-[Install]
-WantedBy=multi-user.target
-EOT
-
-sudo systemctl daemon-reload
-
 echo "Generating supervisord config"
 sudo unlink /tmp/supervisor.sock
 rm -f supervisord.conf
@@ -107,7 +86,40 @@ autostart=true
 autorestart=true
 startsecs=10
 stopwaitsecs=600
+
+[program:test]
+autostart = true
+user=root
+command=$cwd/.env/bin/uwsgi --ini $cwd/talos.ini
+--module web --callable app
+priority=1
+redirect_stderr=true
+stdout_logfile = $cwd/uwsgid.log
+stopsignal=QUIT
 EOT
+
+echo "Creating service"
+
+sudo bash -c 'cat > /etc/systemd/system/talos.service' << EOT
+#Metadata and dependencies section
+[Unit]
+Description=Talos service
+After=network.target
+#Define users and app working directory
+[Service]
+User=$USER
+Group=www-data
+WorkingDirectory=$cwd
+Environment="PATH=$cwd/.env/bin"
+ExecStart=$cwd/.env/bin/supervisord
+#Link the service to start on multi-user system up
+[Install]
+WantedBy=multi-user.target
+EOT
+
+sudo systemctl daemon-reload
+
+
 
 echo "Starting Talos and supervisord daemons"
 sudo systemctl start talos
