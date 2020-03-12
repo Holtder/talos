@@ -87,11 +87,10 @@ autorestart=true
 startsecs=10
 stopwaitsecs=600
 
-[program:test]
+[program:uwsgid]
 autostart = true
 user=root
 command=$cwd/.env/bin/uwsgi --ini $cwd/talos.ini
---module web --callable app
 priority=1
 redirect_stderr=true
 stdout_logfile = $cwd/uwsgid.log
@@ -126,6 +125,7 @@ sudo systemctl start talos
 sudo systemctl enable talos
 supervisord
 supervisorctl restart celeryd
+supervisorctl restart uwsgid
 
 echo "Configuring nginx"
 echo "What is the address (domain or ip) you intend to serve Talos from [default=0.0.0.0]:"
