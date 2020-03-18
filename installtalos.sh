@@ -24,6 +24,8 @@ while true; do
     esac
 done
 
+mkdir log
+
 echo "Enabling redis service"
 sudo systemctl enable redis-server.service
 sudo systemctl start redis-server.service
@@ -73,6 +75,29 @@ sudo rm -f /etc/systemd/system/talos.service
 sudo systemctl daemon-reload
 sudo systemctl reset-failed
 
+echo "Generating supervisord config"
+sudo unlink /tmp/supervisor.sock
+rm -f supervisord.conf
+echo_supervisord_conf > $cwd/supervisord.conf
+cat <<EOT >> $cwd/supervisord.conf
+[program:celeryd]
+command=$cwd/.env/bin/celery -A entrypoint_celery.celery worker --concurrency=1
+stdout_logfile=$cwd/log/celeryd.log
+stderr_logfile=$cwd/log/celeryd.log
+autostart=true
+autorestart=true
+startsecs=10
+stopwaitsecs=600
+
+[program:uwsgid]
+autostart = true
+command=$cwd/.env/bin/uwsgi --ini $cwd/talos.ini
+priority=1
+redirect_stderr=true
+stdout_logfile = $cwd/log/uwsgi.log
+stopsignal=QUIT
+EOT
+
 echo "Creating service"
 
 sudo bash -c 'cat > /etc/systemd/system/talos.service' << EOT
@@ -86,7 +111,7 @@ User=$USER
 Group=www-data
 WorkingDirectory=$cwd
 Environment="PATH=$cwd/.env/bin"
-ExecStart=$cwd/.env/bin/uwsgi --ini $cwd/talos.ini
+ExecStart=$cwd/.env/bin/supervisord
 #Link the service to start on multi-user system up
 [Install]
 WantedBy=multi-user.target
@@ -94,26 +119,14 @@ EOT
 
 sudo systemctl daemon-reload
 
-echo "Generating supervisord config"
-sudo unlink /tmp/supervisor.sock
-rm -f supervisord.conf
-echo_supervisord_conf > $cwd/supervisord.conf
-cat <<EOT >> $cwd/supervisord.conf
-[program:celeryd]
-command=$cwd/.env/bin/celery -A entrypoint_celery.celery worker --concurrency=1
-stdout_logfile=$cwd/celeryd.log
-stderr_logfile=$cwd/celeryd.log
-autostart=true
-autorestart=true
-startsecs=10
-stopwaitsecs=600
-EOT
+
 
 echo "Starting Talos and supervisord daemons"
 sudo systemctl start talos
 sudo systemctl enable talos
 supervisord
 supervisorctl restart celeryd
+supervisorctl restart uwsgid
 
 echo "Configuring nginx"
 echo "What is the address (domain or ip) you intend to serve Talos from [default=0.0.0.0]:"
