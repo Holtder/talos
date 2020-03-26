@@ -1,4 +1,5 @@
 # Talos
+TESTBRANCH FOR DIFFERENT KIND OF DB
 
 
 (These notes are still very much a WiP; Talos is being developed on Ubuntu 18.04 in Python 3.6)
