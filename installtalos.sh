@@ -64,6 +64,7 @@ echo "Creating virtual environment and installing Required Packages"
 
 python3 -m venv .env || exit 1
 source ".env/bin/activate" || exit 1
+pip install wheel || exit 1
 pip install -r "requirements.txt" || exit 1
 rm -f "requirements.txt"
 
