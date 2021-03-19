@@ -1,37 +1,28 @@
-## Welcome to GitHub Pages
+# Talos
 
-You can use the [editor on GitHub](https://github.com/Holtder/Talos/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+Talos is a self-hosted web-based search engine for mobile applications on the Google Play store and Apple App store. In the following days, this page will feature a step by step guide on how to install and host your own instance of Talos. Afterwards a section on usage and troubleshooting will be added as well. Stay tuned!
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## About Talos
+### What is Talos
 
-### Markdown
+### Who are we?
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### What to expect?
 
-```markdown
-Syntax highlighted code block
+## Installation
+### Automatic script
+*Recommended if you have no experience with self-hosted applications*
 
-# Header 1
-## Header 2
-### Header 3
+### Manual installation
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+## Usage
+### The Job system
 
-**Bold** and _Italic_ and `Code` text
+### Adding a job to the queue
 
-[Link](url) and ![Image](src)
-```
+### Starting a job at the queue
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Results and exporting
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Holtder/Talos/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Troubleshooting
