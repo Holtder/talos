@@ -6,6 +6,35 @@ if [ "$pyv" != "3.6" ]; then
     exit 1
 fi
 
+cd ~
+if [ -d "Talos" ] 
+    then
+        installed=true
+        echo "Talos is already installed in this directory"
+    else
+        installed=false
+        echo "Talos is not yet installed in this directory"
+fi
+
+if [ -f "Talos/celeryd.pid" ]
+        echo "Celery was not shut down correctly last time, closing now."
+        kill -9 `cat Talos/celeryd.pid`
+        rm -f Talos/celeryd.pid
+fi
+
+# trap ctrl-c and call ctrl_c()
+trap ctrl_c INT
+function ctrl_c() {
+        echo "** Closing Talos"
+        if [ -f "Talos/celeryd.pid" ] 
+            then
+                cd ~
+                echo "Killing celery"
+                kill -9 `cat Talos/celeryd.pid`
+                rm -f Talos/celeryd.pid
+        fi
+}
+
 echo "Warning!"
 echo "This script will attempt to install the following packages:"
 echo " - Git"
