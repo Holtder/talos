@@ -26,6 +26,7 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 > **NOTE 1:** *As mentioned above, copy each command and paste it into WSL by clicking the right mouse button on the WSL window.*
+
 > **NOTE 2:** *In Linux, administrator accounts are referred to as super-users. The first word of each line, sudo, stands for "super-user do". Everything written after this word is executed with administator privileges. If you are asked for the password you defined when setting up WSL, please do so.*
 
 ## Automatic script
