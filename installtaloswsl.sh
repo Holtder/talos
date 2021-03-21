@@ -7,15 +7,6 @@ if [ "$pyv" != "3.6" ]; then
 fi
 
 cd ~
-if [ -d "Talos" ] 
-    then
-        installed=true
-        echo "Talos is already installed in this directory"
-    else
-        installed=false
-        echo "Talos is not yet installed in this directory"
-fi
-
 if [ -f "Talos/celeryd.pid" ]
         echo "Celery was not shut down correctly last time, closing now."
         kill -9 `cat Talos/celeryd.pid`
@@ -108,7 +99,7 @@ case $CHOICE in
 
             cd "Talos" || exit 1
 
-            mv "installtaloswsl.sh" "../talos.sh
+            mv "installtaloswsl.sh" "../talos.sh"
             chmod +x ../talos.sh
             rm -rf ".git"
             rm -f ".gitignore"
