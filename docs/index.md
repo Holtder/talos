@@ -23,9 +23,20 @@ $ sudo apt-get upgrade
 
 
 ### Automatic script
-*Recommended if you have no experience with self-hosted applications*
+#### Get the right folder
+Because this guide assumes no prior knowledge of Linux, we wrote a small script that will create a directory names Talos in the currently selected directory to install Talos to. If you are running WSL solely for the purposes of using Talos, it is recommended to install Talos in the home directory. If your prompt has a tilde (~) before the dollar sign ($) then you are at the home directory.
 
-### Manual installation
+This is where you want to be:
+![image](https://user-images.githubusercontent.com/1879915/111901355-e5502000-8a37-11eb-9870-bc012dbcf6b4.png)
+
+In this image you can see that the prompt is currently located at the "*wrongdirectory*" directory.
+![image](https://user-images.githubusercontent.com/1879915/111901348-d9fcf480-8a37-11eb-8338-d57489dcd45a.png)
+
+Solve this by using the following command
+$ cd ~
+![image](https://user-images.githubusercontent.com/1879915/111901395-33fdba00-8a38-11eb-83da-41606c2efee6.png)
+
+
 
 
 ## Usage
