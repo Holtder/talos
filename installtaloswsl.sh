@@ -14,7 +14,8 @@ echo " - Python3-venv"
 echo " - Python3-wheel"
 echo
 echo "It will also install redis and nginx on your server. Make sure you have uninstalled any webservers beforehand!"
-echo "Additionally, if you are running a fresh installation of WSL, make sure to first run sudo apt-get update"
+echo "Additionally, if you are running a fresh installation of WSL, make sure to first run sudo apt-get update."
+echo "If you haven't run it, WSL will close"
 echo
 while true; do
     read -p "Is this ok? (Y/N)" yn
