@@ -18,9 +18,10 @@ If you are the average user with no prior experience with Linux, you generally w
 For a guide on getting this ready I suggest following the manual method found in [this guide](https://docs.microsoft.com/en-us/windows/wsl/install-win10#manual-installation-steps). Make sure to select *Ubuntu 18.04* in step 6.
 
 Once you have everything ready open up Ubuntu by opening the Start Menu and typing in Ubuntu 18.04 and selecting the first option. Follow instructions until you reach a prompt. To make sure your system is up to date run the following two commands:
+```bash
 $ sudo apt-get update
 $ sudo apt-get upgrade
-
+```
 
 ### Automatic script
 #### Get the right folder
@@ -35,13 +36,17 @@ In this image you can see that the prompt is currently located at the "*wrongdir
 ![image](https://user-images.githubusercontent.com/1879915/111901409-5394e280-8a38-11eb-9ba1-3d8a15f1294f.png)
 
 Solve this by using the following command
+```bash
 $ cd ~
+```
 
 ![image](https://user-images.githubusercontent.com/1879915/111901395-33fdba00-8a38-11eb-83da-41606c2efee6.png)
 
 #### Using the script
 From the WSL prompt, use the following command:
+```bash
 $ source <(curl -s https://raw.githubusercontent.com/Holtder/Talos/master/installtaloswsl.sh)
+```
 
 Notice how the filename is "install talos **wsl**". If you are running a virtual machine use installtalos.sh.
 
