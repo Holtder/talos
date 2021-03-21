@@ -38,3 +38,6 @@ $ source <(curl -s https://raw.githubusercontent.com/Holtder/Talos/master/instal
 ```
 
 Notice how the filename is "install talos **wsl**". If you are running a virtual machine use installtalos.sh.
+
+### Starting Talos from WSL
+
