@@ -39,10 +39,15 @@ $ cd ~
 
 ![image](https://user-images.githubusercontent.com/1879915/111901395-33fdba00-8a38-11eb-83da-41606c2efee6.png)
 
+#### Using the script
+From the WSL prompt, use the following command:
+$ source <(curl -s https://raw.githubusercontent.com/Holtder/Talos/master/installtaloswsl.sh)
 
-
+Notice how the filename is "install talos **wsl**". If you are running a virtual machine use installtalos.sh.
 
 ## Usage
+### Starting Talos from WSL
+
 ### The Job system
 
 ### Adding a job to the queue
