@@ -49,18 +49,18 @@ Type "1" and press "Enter" to confirm.
 ### Installing prerequisites
 Next you will be presented with the following prompt:
 
-![image](https://user-images.githubusercontent.com/1879915/111901959-3ca3bf80-8a3b-11eb-8bb1-e9322631d4c4.png)
+![image](https://user-images.githubusercontent.com/1879915/111909572-20654a00-8a5e-11eb-99b4-c580cc3085cb.png)
 
 If you have read and done everyting in this guide up to this point, you can accept this prompt without worries. If you forgot to use the update/upgrade commands, this script will crash and the Ubuntu windows will close.
 
-### Creating the folder and downloading the files
+### Creating the directory and downloading the files
 The next step the script will perform for you is the downloading (cloning) of all the relevant files you need for running talos and placing them in the right folder. Read the prompt as presented and accept.
 
-![image](https://user-images.githubusercontent.com/1879915/111902241-c902b200-8a3c-11eb-891c-8364945430c3.png)
+![image](https://user-images.githubusercontent.com/1879915/111909638-691d0300-8a5e-11eb-990b-2ebfd6f65547.png)
 
 Let the installer run it's course, it will be completed once you see the following text:
 
-![image](https://user-images.githubusercontent.com/1879915/111902301-36aede00-8a3d-11eb-9754-f36013ccbd77.png)
+![image](https://user-images.githubusercontent.com/1879915/111909671-85b93b00-8a5e-11eb-9ff8-ae6da4501a7b.png)
 
 **Congratulations**, Talos is now successfully installed on your instance of Ubuntu.
 
@@ -70,6 +70,6 @@ In WSL, type the following:
 talos-server
 ```
 
-You will be presented with
+You will be presented with the same choice as when you first started the installer, now choose option "2" and press Enter.
 
 
