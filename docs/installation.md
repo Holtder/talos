@@ -57,6 +57,14 @@ The next step the script will perform for you is the downloading (cloning) of al
 
 ![image](https://user-images.githubusercontent.com/1879915/111902241-c902b200-8a3c-11eb-891c-8364945430c3.png)
 
+Let the installer run it's course, you will know this if you are presented with the following prompt:
 
-### Starting Talos from WSL
+![image](https://user-images.githubusercontent.com/1879915/111902301-36aede00-8a3d-11eb-9754-f36013ccbd77.png)
+
+**Congratulations**, Talos is now successfully installed on your instance of Ubuntu.
+
+> **NOTE:** *At the beginning of the prompt you can see (.env) and the current working directory is ~/Talos. The next section will explain what these means and how to fix this if they are missing.
+
+## Starting Talos from WSL
+
 
