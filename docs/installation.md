@@ -53,16 +53,12 @@ Next you will be presented with the following prompt:
 
 If you have read and done everyting in this guide up to this point, you can accept this prompt without worries. If you forgot to use the update/upgrade commands, this script will crash and the Ubuntu windows will close.
 
-> **WARNING:** *This script requires administrator priviliges as it will install prerequisite packages and programs on your system, if asked, enter the password you defined when configuring WSL/Ubuntu.*
-
-![image](https://user-images.githubusercontent.com/1879915/111902013-85f40f00-8a3b-11eb-95d2-9ab34ab46a77.png)
-
 ### Creating the folder and downloading the files
 The next step the script will perform for you is the downloading (cloning) of all the relevant files you need for running talos and placing them in the right folder. Read the prompt as presented and accept.
 
 ![image](https://user-images.githubusercontent.com/1879915/111902241-c902b200-8a3c-11eb-891c-8364945430c3.png)
 
-Let the installer run it's course, you will know this if you are presented with the following prompt:
+Let the installer run it's course, it will be completed once you see the following text:
 
 ![image](https://user-images.githubusercontent.com/1879915/111902301-36aede00-8a3d-11eb-9754-f36013ccbd77.png)
 
@@ -74,6 +70,6 @@ In WSL, type the following:
 talos-server
 ```
 
-You will be presented wit
+You will be presented with
 
 
