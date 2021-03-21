@@ -6,12 +6,12 @@ This guide requires the use of WSL. In the next section will elaborate more on t
 
 | Element         | Purpose                                                                                                                                              |
 |-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| username        | Linux has users, just like Windows. When you first set up WSL you will be asked to set a username and can be seen here.                              |
+| username        | Linux has users, just like Windows. This is the name you chose when you first set up WSL.                                                            |
 | ComputerName    | When Windows is installed to a PC or laptop, it assigns a name to it. In Linux, the name of the pc is shown after the username with an @ in between. |
 | ~/DirectoryName | Whenever you make/do anything in WSL, it happens in a directory/folder. The blue text shows which folder is currently active.                        |
 | $               | Anything you type will appear after this dollar sign. In this guide several commands will be supplied to copy in the WSL window, enter those here.   |
 
-> **NOTE:** In WSL, copy and paste are not assigned to CTRL+C and CTRL+V. If you want to paste something in WSL, you have to press the right mouse button.
+> **NOTE:** *In WSL, copy and paste are not assigned to CTRL+C and CTRL+V. If you want to paste something in WSL, you have to press the right mouse button. Then press Enter to confirm.*
 
 ## Preparation
 If you are the average user with no prior Linux experience, you generally want to use WSL. Windows Subsystem for Linux is a Windows 10 tool that allows users to run a light instance of Linux on their own computer without having to set up a complicated virtual machine or a separate server running Linux. In order to use Talos you will need the following:
@@ -25,27 +25,33 @@ Once you have everything ready start Ubuntu by opening the Start Menu and typing
 sudo apt-get update
 sudo apt-get upgrade
 ```
-> **NOTE:** As mentioned above, copy each command and paste it into WSL by clicking the right mouse button on the WSL window.
+> **NOTE:** *As mentioned above, copy each command and paste it into WSL by clicking the right mouse button on the WSL window.*
 
 ## Automatic script
-Because this guide assumes no prior knowledge of Linux, we wrote a small script that will create install Talos in the current user's home directory.
+Because this guide assumes no prior knowledge of Linux, we wrote a small script that will install Talos in the current user's home directory.
 
 > **NOTE:** *In Linux, home directories are user-specific directories located in /home/your-username/. In my instance, as my user is named holtder, my home directory is /home/holtder/. For ease of use, linux has a wildcard to quickly access the home directory of the user that is currently logged in, the tilde (~).*
 
 ### Starting the script
 From the WSL prompt, use the following command:
 ```bash
-$ source <(curl -s https://raw.githubusercontent.com/Holtder/Talos/master/installtaloswsl.sh)
+source <(curl -s https://raw.githubusercontent.com/Holtder/Talos/master/installtaloswsl.sh)
 ```
+
+You will be presented with the following:
+
+![image](https://user-images.githubusercontent.com/1879915/111909326-20b11580-8a5d-11eb-8ee5-b3656d60df10.png)
+
+Type "1" and press "Enter" to confirm.
 
 ### Installing prerequisites
 Next you will be presented with the following prompt:
 
 ![image](https://user-images.githubusercontent.com/1879915/111901959-3ca3bf80-8a3b-11eb-8bb1-e9322631d4c4.png)
 
-If you have read and done everyting that is suggested in this guide up to this point, you can accept this prompt without worries. If you forgot to use the update/upgrade commands, this script will crash and the Ubuntu windows will close.
+If you have read and done everyting in this guide up to this point, you can accept this prompt without worries. If you forgot to use the update/upgrade commands, this script will crash and the Ubuntu windows will close.
 
-This script requires administrator priviliges as it will install prerequisite packages and programs on your system, on the following prompt, enter the password you defined when configuring WSL/Ubuntu.
+> **WARNING:** *This script requires administrator priviliges as it will install prerequisite packages and programs on your system, if asked, enter the password you defined when configuring WSL/Ubuntu.*
 
 ![image](https://user-images.githubusercontent.com/1879915/111902013-85f40f00-8a3b-11eb-95d2-9ab34ab46a77.png)
 
@@ -60,8 +66,12 @@ Let the installer run it's course, you will know this if you are presented with 
 
 **Congratulations**, Talos is now successfully installed on your instance of Ubuntu.
 
-> **NOTE:** *At the beginning of the prompt you can see (.env) and the current working directory is ~/Talos. The next section will explain what these means and how to fix this if they are missing.
+## Starting Talos
+In WSL, type the following:
+``` bash
+talos-server
+```
 
-## Starting Talos from WSL
+You will be presented wit
 
 
