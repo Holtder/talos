@@ -1,45 +1,42 @@
 # Installation
+## Before you start
+This guide requires the use of WSL. In the next section will elaborate more on that, but it is wise to get familliar with the elements of the WSL terminal first:
+
+![image](https://user-images.githubusercontent.com/1879915/111908655-5274ad00-8a5a-11eb-9ab7-d3afcd8151e5.png)
+
+| Element         | Purpose                                                                                                                                              |
+|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| username        | Linux has users, just like Windows. When you first set up WSL you will be asked to set a username and can be seen here.                              |
+| ComputerName    | When Windows is installed to a PC or laptop, it assigns a name to it. In Linux, the name of the pc is shown after the username with an @ in between. |
+| ~/DirectoryName | Whenever you make/do anything in WSL, it happens in a directory/folder. The blue text shows which folder is currently active.                        |
+| $               | Anything you type will appear after this dollar sign. In this guide several commands will be supplied to copy in the WSL window, enter those here.   |
+
+> **NOTE:** In WSL, copy and paste are not assigned to CTRL+C and CTRL+V. If you want to paste something in WSL, you have to press the right mouse button.
+
 ## Preparation
-If you are the average user with no prior experience with Linux, you generally want to use WSL. Windows Subsystem for Linux is a Windows 10 tool that allows users to run a light instance of linux on their own computer without having to set up a complicated virtual machine or a separate server running Linux. In order to use Talos you will need the following:
+If you are the average user with no prior Linux experience, you generally want to use WSL. Windows Subsystem for Linux is a Windows 10 tool that allows users to run a light instance of Linux on their own computer without having to set up a complicated virtual machine or a separate server running Linux. In order to use Talos you will need the following:
 - A windows 10 PC with WSL enabled
 - Ubuntu 18.04 LTS installed on WSL
 
 For a guide on getting this ready I suggest following the manual method found in [this guide](https://docs.microsoft.com/en-us/windows/wsl/install-win10#manual-installation-steps). Make sure to select *Ubuntu 18.04* in step 6.
 
-Once you have everything ready open up Ubuntu by opening the Start Menu and typing in Ubuntu 18.04 and selecting the first option. Follow instructions until you reach a prompt. To make sure your system is up to date run the following two commands:
+Once you have everything ready start Ubuntu by opening the Start Menu and typing in Ubuntu 18.04 and selecting the first option. Follow instructions until you reach a prompt. To make sure your system is up to date run the first command, then the second:
 ```bash
-$ sudo apt-get update
-$ sudo apt-get upgrade
+sudo apt-get update
+sudo apt-get upgrade
 ```
+> **NOTE:** As mentioned above, copy each command and paste it into WSL by clicking the right mouse button on the WSL window.
 
 ## Automatic script
-### Get the right folder
-Because this guide assumes no prior knowledge of Linux, we wrote a small script that will create a directory names Talos in the currently selected directory to install Talos to. If you are running WSL solely for the purposes of using Talos, it is recommended to install Talos in the home directory. If your prompt has a tilde (~) before the dollar sign ($) then you are at the home directory.
+Because this guide assumes no prior knowledge of Linux, we wrote a small script that will create install Talos in the current user's home directory.
 
 > **NOTE:** *In Linux, home directories are user-specific directories located in /home/your-username/. In my instance, as my user is named holtder, my home directory is /home/holtder/. For ease of use, linux has a wildcard to quickly access the home directory of the user that is currently logged in, the tilde (~).*
-
-This is where you want to be:
-
-![image](https://user-images.githubusercontent.com/1879915/111901355-e5502000-8a37-11eb-9870-bc012dbcf6b4.png)
-
-In this image you can see that the prompt is currently located at the "*wrongdirectory*" directory.
-
-![image](https://user-images.githubusercontent.com/1879915/111901409-5394e280-8a38-11eb-9ba1-3d8a15f1294f.png)
-
-Solve this by using the following command
-```bash
-$ cd ~
-```
-
-![image](https://user-images.githubusercontent.com/1879915/111901395-33fdba00-8a38-11eb-83da-41606c2efee6.png)
 
 ### Starting the script
 From the WSL prompt, use the following command:
 ```bash
 $ source <(curl -s https://raw.githubusercontent.com/Holtder/Talos/master/installtaloswsl.sh)
 ```
-
-Notice how the filename is "install talos **wsl**". If you are running a virtual machine use installtalos.sh.
 
 ### Installing prerequisites
 Next you will be presented with the following prompt:
