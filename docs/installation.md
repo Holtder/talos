@@ -70,6 +70,14 @@ In WSL, type the following:
 talos-server
 ```
 
-You will be presented with the same choice as when you first started the installer, now choose option "2" and press Enter.
+You will be presented with the same choice as when you first started the installer, now choose option "2" and press Enter. Once you see the following screen, Talos has initialized!
 
+![image](https://user-images.githubusercontent.com/1879915/111909791-f2343a00-8a5e-11eb-9f64-ae22ed880c06.png)
 
+Open a browser of your preference, such as Google Chrome, Internet Explorer or Mozilla Firefox, and enter the following address:
+> 127.0.0.1:5000
+
+## Closing Talos
+In WSL, simply press Ctrl+C to close the Talos server.
+
+> **NOTE:** *In Linux, the C in Ctrl+C does not stand for 'Copy', but for 'Close'*
