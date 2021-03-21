@@ -69,6 +69,7 @@ case $CHOICE in
                     * ) echo "Please answer yes or no. (Y/N)";;
                 esac
             done
+            clear
 
             echo "Enabling redis service"
             sudo service redis-server start
@@ -78,8 +79,6 @@ case $CHOICE in
                 exit 1
             fi
 
-            echo
-            echo
             echo "Warning!"
             echo
             echo "This script will create a Talos directory at the location of the installscript"
@@ -121,6 +120,7 @@ case $CHOICE in
             deactivate
             cd ~
 
+            clear
             echo "Talos is now installed!"
             echo "Run talos with the following command:"
             echo "./talos.sh"
