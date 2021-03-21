@@ -14,7 +14,7 @@ This guide requires the use of WSL. In the next section will elaborate more on t
 > **NOTE:** *In WSL, copy and paste are not assigned to CTRL+C and CTRL+V. If you want to paste something in WSL, you have to press the right mouse button. Then press Enter to confirm.*
 
 ## Preparation
-If you are the average user with no prior Linux experience, you generally want to use WSL. Windows Subsystem for Linux is a Windows 10 tool that allows users to run a light instance of Linux on their own computer without having to set up a complicated virtual machine or a separate server running Linux. In order to use Talos you will need the following:
+If you are the average user with no prior Linux experience, you generally want to use the Windows Subsystem for Linux (WSL). WSL is a Windows 10 tool that allows users to run a light instance of Linux on their own computer without having to set up a complicated virtual machine or a separate server running Linux. In order to use Talos you will need the following:
 - A windows 10 PC with WSL enabled
 - Ubuntu 18.04 LTS installed on WSL
 
