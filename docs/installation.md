@@ -16,10 +16,7 @@ $ sudo apt-get upgrade
 ### Get the right folder
 Because this guide assumes no prior knowledge of Linux, we wrote a small script that will create a directory names Talos in the currently selected directory to install Talos to. If you are running WSL solely for the purposes of using Talos, it is recommended to install Talos in the home directory. If your prompt has a tilde (~) before the dollar sign ($) then you are at the home directory.
 
-```
-In Linux, home directories are user-specific directories located in /home/your-username/. In my instance, as my user is named holtder, my home directory is /home/holtder/. For ease of use, linux has a wildcard to quickly access the home directory of the user that is currently logged in, the tilde (~). 
-
-```
+> **NOTE:** *In Linux, home directories are user-specific directories located in /home/your-username/. In my instance, as my user is named holtder, my home directory is /home/holtder/. For ease of use, linux has a wildcard to quickly access the home directory of the user that is currently logged in, the tilde (~).*
 
 This is where you want to be:
 
@@ -55,6 +52,10 @@ This script requires administrator priviliges as it will install prerequisite pa
 
 ![image](https://user-images.githubusercontent.com/1879915/111902013-85f40f00-8a3b-11eb-95d2-9ab34ab46a77.png)
 
+### Creating the folder and downloading the files
+The next step the script will perform for you is the downloading (cloning) of all the relevant files you need for running talos and placing them in the right folder. Read the prompt as presented and accept.
+
+![image](https://user-images.githubusercontent.com/1879915/111902241-c902b200-8a3c-11eb-891c-8364945430c3.png)
 
 
 ### Starting Talos from WSL
