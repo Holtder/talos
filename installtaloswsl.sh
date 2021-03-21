@@ -47,7 +47,6 @@ do
     esac
 done
 
-clear
 case $CHOICE in
         1)
             echo "Warning!"
@@ -81,7 +80,7 @@ case $CHOICE in
 
             echo "Warning!"
             echo
-            echo "This script will create a Talos directory at the location of the installscript"
+            echo "This script will create a Talos directory at the home directory of the current user"
             echo "If a Talos installation is already present, it will be deleted!"
             echo "If this is not what you want, decline this prompt, move the script to your preferred location and run it again."
             echo "Current Installation Directory: $PWD/Talos"
@@ -100,8 +99,7 @@ case $CHOICE in
 
             cd "Talos" || exit 1
 
-            mv "installtaloswsl.sh" "../talos.sh"
-            chmod +x ../talos.sh
+            chmod +x installtaloswsl.sh
             rm -rf ".git"
             rm -f ".gitignore"
             rm -f "README.md"
@@ -119,11 +117,15 @@ case $CHOICE in
 
             deactivate
             cd ~
-
+            
+            echo 'alias talos-server='$PWD/Talos/installtaloswsl.sh'' >> ~/.bashrc 
+            alias talos-server='/home/holtder/Talos/installtaloswsl.sh'
+            
             clear
             echo "Talos is now installed!"
             echo "Run talos with the following command:"
-            echo "./talos.sh"
+            echo "talos-server"
+            echo "And choosing option 2"
             ;;
         2)
             cd Talos
