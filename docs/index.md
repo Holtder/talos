@@ -10,6 +10,12 @@ Talos is a self-hosted web-based search engine for mobile applications on the Go
 ### What to expect?
 
 ## Installation
+### Preparation
+If you are the average user with no prior experience with Linux, you generally want to use WSL. Windows Subsystem for Linux is a Windows 10 tool that allows users to run a light instance of linux on their own computer without having to set up a complicated virtual machine or a separate server running Linux. In order to use Talos you will need the following:
+- A windows 10 PC with WSL enabled
+- Ubuntu 18.04 LTS installed on WSL
+
+For a guide on getting this ready I suggest following the manual method found in [this guide](https://docs.microsoft.com/en-us/windows/wsl/install-win10#manual-installation-steps). Make sure to select *Ubuntu 18.04* in step 6.
 ### Automatic script
 *Recommended if you have no experience with self-hosted applications*
 
