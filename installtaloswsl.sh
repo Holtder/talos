@@ -26,25 +26,26 @@ function ctrl_c() {
                 rm -f Talos/celeryd.pid
         fi
 }
-
-HEIGHT=15
-WIDTH=40
-CHOICE_HEIGHT=4
-BACKTITLE="Talos"
-TITLE="Welcome"
-MENU="What do you wish to do:"
-
-OPTIONS=(1 "(re)Install Talos"
-         2 "Start Talos"
-         3 "Cancel")
-
-CHOICE=$(dialog --clear \
-                --backtitle "$BACKTITLE" \
-                --title "$TITLE" \
-                --menu "$MENU" \
-                $HEIGHT $WIDTH $CHOICE_HEIGHT \
-                "${OPTIONS[@]}" \
-                2>&1 >/dev/tty)
+CHOICE=0
+PS3='What do you wish to do?'
+options=("(re)Install Talos" "Start Talos Server" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "(re)Install Talos")
+            CHOICE=1
+            break
+            ;;
+        "Start Talos Server")
+            CHOICE=2
+            break
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
 
 clear
 case $CHOICE in
