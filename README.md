@@ -10,7 +10,7 @@ A step-by-step guide on how to install and run Talos will soon be found on https
 
 This application was developed on Ubuntu 18.04 and is only supported on this platform for now. Get a Ubuntu 18.04 server and make sure you have no webservers (apache2, nginx and so on) installed/running on your server. WARNING: It is STRONGLY recommended to install this on a freshly installed virtual machine intended to run this server and this server only. Extensive testing on different platforms has yet to be performed so usage in any other setting is not supported by the developer.
 
-Suggestion: *If you are running Windows 10, use WSL, open the microsoft store and install Ubuntu 18.04. Then open wsl as your terminal. The following steps should work just as well.*
+Suggestion: Currently WSL is not supported due to the absence of systemctl support, which is currently required for talos to run properly.
 
 ### Automatic installation (Install Script)
 
