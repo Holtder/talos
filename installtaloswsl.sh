@@ -7,7 +7,8 @@ if [ "$pyv" != "3.6" ]; then
 fi
 
 cd ~
-if [ -f "Talos/celeryd.pid" ]
+if [ -f "Talos/celeryd.pid" ] 
+    then
         echo "Celery was not shut down correctly last time, closing now."
         kill -9 `cat Talos/celeryd.pid`
         rm -f Talos/celeryd.pid
