@@ -119,7 +119,7 @@ case $CHOICE in
             cd ~
             
             echo 'alias talos-server='$PWD/Talos/installtaloswsl.sh'' >> ~/.bashrc 
-            alias talos-server='/home/holtder/Talos/installtaloswsl.sh'
+            alias talos-server='$PWD/Talos/installtaloswsl.sh'
             
             clear
             echo "Talos is now installed!"
