@@ -16,6 +16,12 @@ If you are the average user with no prior experience with Linux, you generally w
 - Ubuntu 18.04 LTS installed on WSL
 
 For a guide on getting this ready I suggest following the manual method found in [this guide](https://docs.microsoft.com/en-us/windows/wsl/install-win10#manual-installation-steps). Make sure to select *Ubuntu 18.04* in step 6.
+
+Once you have everything ready open up Ubuntu by opening the Start Menu and typing in Ubuntu 18.04 and selecting the first option. Follow instructions until you reach a prompt. To make sure your system is up to date run the following two commands:
+$ sudo apt-get update
+$ sudo apt-get upgrade
+
+
 ### Automatic script
 *Recommended if you have no experience with self-hosted applications*
 
