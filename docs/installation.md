@@ -20,6 +20,8 @@ If you are the average user with no prior Linux experience, you generally want t
 
 For a guide on getting this ready I suggest following the manual method found in [this guide](https://docs.microsoft.com/en-us/windows/wsl/install-win10#manual-installation-steps). Make sure to select *Ubuntu 18.04* in step 6.
 
+> **DISCLAIMER:** *WSL is a product made by the developers at Microsoft, it has nothing to do with Talos or it's developers. As such, we cannot provide support for problems encountered during the installation process of WSL.*
+
 Once you have everything ready start Ubuntu by opening the Start Menu and typing in Ubuntu 18.04 and selecting the first option. Follow instructions until you reach a prompt. To make sure your system is up to date run the first command, then the second:
 ```bash
 sudo apt-get update
