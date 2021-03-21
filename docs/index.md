@@ -32,7 +32,7 @@ This is where you want to be:
 
 In this image you can see that the prompt is currently located at the "*wrongdirectory*" directory.
 
-![image](https://user-images.githubusercontent.com/1879915/111901348-d9fcf480-8a37-11eb-8338-d57489dcd45a.png)
+![image](https://user-images.githubusercontent.com/1879915/111901409-5394e280-8a38-11eb-9ba1-3d8a15f1294f.png)
 
 Solve this by using the following command
 $ cd ~
