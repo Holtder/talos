@@ -55,8 +55,6 @@ Sadly, due to restrictions made by the developers behind both Apple and Google a
 
 > **DESCRIPTION:** Job fencing 01 has completed, whereas 02 and 03 noow have moved up the queue.
 
+## Results
 
- 
-## Results and exporting
-
-## Troubleshooting
+For more information on how to export and use these results, please consult [exporting](export.md)
