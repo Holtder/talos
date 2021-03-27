@@ -1,7 +1,7 @@
 # Usage
 
 ## The User Interface
-If you complete all the steps in [instalation](installation/md) and open ```http://127.0.0.1:5000``` in your browser of preference, you will find the following page:
+If you complete all the steps in [installation](installation/md) and open ```http://127.0.0.1:5000``` in your browser of preference, you will find the following page:
 
 ![image](https://user-images.githubusercontent.com/1879915/112722091-c950f080-8f07-11eb-9c0e-0a3afeb52ed7.png)
 
