@@ -24,6 +24,6 @@ When not at work, Ender likes to play board- or computergames, paint miniatures 
 ## RB
 <img align="right" width="300" height="300" src="https://user-images.githubusercontent.com/1879915/112725270-a3334c80-8f17-11eb-84ba-11ea1fc56539.png">
 
-test 1 2 3
+Coming soon!
 <br clear="right"/>
 
