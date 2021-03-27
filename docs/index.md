@@ -11,6 +11,6 @@ Wish to use Talos for yourself? Click here!
 ## [Usage](usage.md)
 Click here for a guide on how to use Talos and how to download the data it collects.
 
-## [Using the data](export.md)
+## [Importing the data](import.md)
 There are multiple ways to process the data provided by Talos. 
 This guide offers *one* way to do this in Excel; at the end of this guide you will have a neat, summarized table of results of multiple queries.
