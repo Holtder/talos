@@ -5,7 +5,7 @@
 Talos is a self-hosted web-based search engine that allows the user to gather a list of apps available on the Apple and Google Play app stores. It allows region specification and the export of gathered data to .CSV files.
 
 ## Installation
-A step-by-step guide on how to install and run Talos can be found on https://holtder.github.io/Talos/.
+A step-by-step guide on how to install and run Talos can be found on https://holtder.github.io/talos/.
 
 You can find talos at the address you chose during install in your preferred browser.
 
