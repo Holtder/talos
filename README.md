@@ -1,5 +1,5 @@
 # Talos
-(Talos was developed on Ubuntu 18.04 in Python 3.6)
+*Talos was developed on Ubuntu 18.04 in Python 3.6*
 
 ## About
 Talos is a self-hosted web-based search engine that allows the user to gather a list of apps available on the Apple and Google Play app stores. It allows region specification and the export of gathered data to .CSV files.
