@@ -17,7 +17,7 @@ As a doctor-to-be, Ender is interested in internal medicine, eHealth and medical
 For his masters thesis he aimed to create an overview and review of available tools in the world of mobile health applications that might aid in preventing [nosocomial infections](https://en.wikipedia.org/wiki/Hospital-acquired_infection).
 
 Ender's penchant for including all things nerdy in other aspects of his life (see: Talos) started from an early moment in his life, when he was named after the main character of a [science-fiction novel](https://en.wikipedia.org/wiki/Ender%27s_Game).
-When not at work, Ender likes to play board- or computergames, paint miniatures or play Dungeons and Dragons.
+When not at work, Ender plays boardgames/computergames, paints miniatures or runs a campaign in Dungeons and Dragons.
 
 <br clear="right"/>
 
