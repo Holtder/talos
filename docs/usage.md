@@ -42,19 +42,27 @@ The page ```Jobs``` provides an overview of all queued or completed queries. Fro
 
 ![image](https://user-images.githubusercontent.com/1879915/112722619-f18e1e80-8f0a-11eb-8b9b-adb81dd69269.png)
 
-> **DESCRIPTION:** As seen in the image above, three queries have been prepared named fencing 01-03. Each job has it's own synonym of fencing and they are all targeted at the US region.
+> As seen in the image above, three queries have been prepared named fencing 01-03. Each job has it's own synonym of fencing and they are all targeted at the US region.
 
 ### Waiting
 Sadly, due to restrictions made by the developers behind both Apple and Google app stores, scraping is not a fast process. Each job may take up to a few minutes, so plan wisely with the job system that Talos offers.
 
 ![image](https://user-images.githubusercontent.com/1879915/112722864-15059900-8f0c-11eb-9835-24f358095396.png)
 
-> **DESCRIPTION:** In this image, fencing 01, 02 and 03 were started in order, with 03 being that last as can be seen in the messagebox at the top of the page. Feel free to refresh the page to see if the job has finished yet.
+> In this image, fencing 01, 02 and 03 were started in order, with 03 being that last as can be seen in the messagebox at the top of the page. Feel free to refresh the page to see if the job has finished yet.
 
 ![image](https://user-images.githubusercontent.com/1879915/112722953-89d8d300-8f0c-11eb-934e-653ba4329515.png)
 
-> **DESCRIPTION:** Job fencing 01 has completed, whereas 02 and 03 noow have moved up the queue.
+> Job fencing 01 has completed, whereas 02 and 03 noow have moved up the queue.
 
 ## Results
+Once a job has finished, it will look something like this:
 
-For more information on how to export and use these results, please consult [exporting](export.md)
+![image](https://user-images.githubusercontent.com/1879915/112723182-93af0600-8f0d-11eb-983a-8f72a3fd343e.png)
+
+There are three options underneath your finished query, download as **CSV**, download as **JSON** or delete the query. 
+If you are unsure which file type to use, consult the manual of the database software you intend to use (or google) which file types can be imported. If you intend to follow the guide on [importing data to excel](import.md), choose CSV.
+
+If everything went successfully, your download files will look like this:
+
+![image](https://user-images.githubusercontent.com/1879915/112723368-62830580-8f0e-11eb-85f2-edcb1f31e24d.png)
