@@ -10,13 +10,13 @@ Enter [Talos](https://en.wikipedia.org/wiki/Talos_(automaton)), an animated stat
 
 # Who are we?
 ## Ender Holten
-<img align="right" width="300" height="300" src="https://user-images.githubusercontent.com/1879915/112725186-361fb700-8f17-11eb-9aa7-9aad631cbf6b.png">
+<img align="right" width="300" height="300" src="eh.png">
 To be added
 
 <br clear="right"/>
 
 ## Robbert Bentvelsen
-<img align="right" width="300" height="300" src="https://user-images.githubusercontent.com/1879915/112725270-a3334c80-8f17-11eb-84ba-11ea1fc56539.png">
+<img align="right" width="300" height="300" src="rb.jpg">
 
 To be added
 
