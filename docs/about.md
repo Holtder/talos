@@ -15,7 +15,7 @@ To be added
 
 <br clear="right"/>
 
-## RB
+## Robbert Bentvelsen
 <img align="right" width="300" height="300" src="https://user-images.githubusercontent.com/1879915/112725270-a3334c80-8f17-11eb-84ba-11ea1fc56539.png">
 
 To be added
