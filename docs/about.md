@@ -14,7 +14,6 @@ Enter [Talos](https://en.wikipedia.org/wiki/Talos_(automaton)), an animated stat
 Currently a medical student following clinical rotations and the main developer behind Talos, Ender is still at the starting point of his medical career. 
 From the start it was Ender's intent to apply his technical skills and know-how to his master's thesis.
 
-
 When presented with Robbert's suggestion to create an appstore-review, he wanted to create a tool that would grant researchers a more secure, systematic and efficient approach in gathering the necessary data; this tool, including it's source code, had to be available for everyone.
 From this idea, Talos was developed.
 
@@ -23,10 +22,11 @@ From this idea, Talos was developed.
 ## Robbert Bentvelsen
 <img align="right" width="300" height="300" src="rb.jpg">
 
-Robbert has roots in internal medicine before making the shift towards medical microbiology. After leading an ebola-diagnostics team in Freetown, Sierra Leone he joined the medical microbiology department at LUMC in Leiden, the Netherlands as a resident physician-microbiologist. Currently Robbert is an attending physician-microbiologist at the Amphia medical centre  in Breda, the Netherlands.
+Robbert grew his roots in internal medicine before making the shift towards medical microbiology. After leading an ebola-diagnostics team in Freetown, Sierra Leone he joined the medical microbiology department at LUMC in Leiden, the Netherlands as a resident physician-microbiologist. Currently Robbert is an attending physician-microbiologist at the Amphia medical centre  in Breda, the Netherlands.
 
 
 Inspired by the numerous available [appstore-reviews](https://pubmed.ncbi.nlm.nih.gov/25748924/), it was Robbert's idea to create an updated overview of the currently available applications that, either directly or indirectly, help in the prevention of hospital acquired infections. 
 
+[Robbert's publications, as found in PubMed](https://pubmed.ncbi.nlm.nih.gov/?term=Bentvelsen+RG+%5Bau%5D)
 <br clear="right"/>
 
