@@ -11,14 +11,15 @@ Enter [Talos](https://en.wikipedia.org/wiki/Talos_(automaton)), an animated stat
 # Who are we?
 ## Ender Holten
 <img align="right" width="300" height="300" src="eh.png">
-To be added
+Currently a medical student following clinical rotations and the main developer begind Talos, Ender (or [holtder](https://github.com/Holtder)) is still at the starting point of his medical career. With a penchant to mix hobbies with his professional life, Talos 
 
 <br clear="right"/>
 
 ## Robbert Bentvelsen
 <img align="right" width="300" height="300" src="rb.jpg">
 
-To be added
+Robbert has roots in internal medicine before making the shift towards medical microbiology. After leading an ebola-diagnostics team in Freetown, Sierra Leone he joined the medical microbiology department at LUMC in Leiden, the Netherlands as a resident physician-microbiologist. Currently Robbert is an attending psysician-microbiologist at the Amphia medical center in Breda, the Netherlands.
+
 
 <br clear="right"/>
 
