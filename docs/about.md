@@ -16,6 +16,8 @@ From the start it was Ender's intent to apply his technical skills and know-how 
 
 When presented with Robbert's suggestion to create an appstore-review, he wanted to create a tool that would grant researchers a more secure, systematic and efficient approach in gathering the necessary data; this tool, including it's source code, had to be available for everyone.
 From this idea, Talos was developed.
+- [LinkedIn - Ender Holten](https://www.linkedin.com/in/enderholten)
+- [Twitter - @EnderHolt](https://twitter.com/enderholt)
 
 <br clear="right"/>
 
@@ -27,6 +29,8 @@ Robbert grew his roots in internal medicine before making the shift towards medi
 
 Inspired by the numerous available [appstore-reviews](https://pubmed.ncbi.nlm.nih.gov/25748924/), it was Robbert's idea to create an updated overview of the currently available applications that, either directly or indirectly, help in the prevention of hospital acquired infections. 
 
-[Robbert's publications, as found in PubMed](https://pubmed.ncbi.nlm.nih.gov/?term=Bentvelsen+RG+%5Bau%5D)
+- [LinkedIn - Robbert Bentvelsen](https://www.linkedin.com/in/robbert-bentvelsen-a2394a15)
+- [PubMed - Bentvelsen RG](https://pubmed.ncbi.nlm.nih.gov/?term=Bentvelsen+RG+%5Bau%5D)
+- [Twitter - @rbentvelsen](https://twitter.com/rbentvelsen)
 <br clear="right"/>
 
