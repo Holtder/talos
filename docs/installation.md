@@ -1,6 +1,6 @@
 # Installation
 ## Before you start
-This guide requires the use of WSL. In the next section will elaborate more on that, but it is wise to get familliar with the elements of the WSL terminal first:
+This guide requires the use of the Windows Subsystem for Linux (WSL). The next section will elaborate more on that, but it is wise to get familliar with the elements of the WSL terminal first:
 
 ![image](https://user-images.githubusercontent.com/1879915/111908655-5274ad00-8a5a-11eb-9ab7-d3afcd8151e5.png)
 
@@ -14,7 +14,7 @@ This guide requires the use of WSL. In the next section will elaborate more on t
 > **NOTE:** *In WSL, copy and paste are not assigned to CTRL+C and CTRL+V. If you want to paste something in WSL, you have to press the right mouse button. Then press Enter to confirm.*
 
 ## Preparation
-If you are the average user with no prior Linux experience, you generally want to use the Windows Subsystem for Linux (WSL). WSL is a Windows 10 tool that allows users to run a light instance of Linux on their own computer without having to set up a complicated virtual machine or a separate server running Linux. In order to use Talos you will need the following:
+If you are an average user with no prior Linux experience, you generally want to use the Windows Subsystem for Linux (WSL). WSL is a Windows 10 tool that allows users to run a light instance of Linux on their own computer without having to set up a complicated virtual machine or a separate server running Linux. In order to use Talos you will need the following:
 - A windows 10 PC with WSL enabled
 - Ubuntu 18.04 LTS installed on WSL
 
