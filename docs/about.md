@@ -12,7 +12,7 @@ Enter [Talos](https://en.wikipedia.org/wiki/Talos_(automaton)), an animated stat
 ## Ender Holten
 <img align="right" width="300" height="300" src="eh.png">
 Currently a medical student following clinical rotations and the main developer behind Talos, Ender is still at the starting point of his medical career. 
-From the start it was Ender's intent to apply his technical skills and know-how to his master's thesis.
+From the beginning it was Ender's intent to apply his technical skills and know-how to his master's thesis.
 
 When presented with Robbert's suggestion to create an appstore-review, he wanted to create a tool that would grant researchers a more secure, systematic and efficient approach in gathering the necessary data; this tool, including it's source code, had to be available for everyone.
 From this idea, Talos was developed.
